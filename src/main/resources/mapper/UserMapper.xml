@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace对应的是mapper/dao层的地址-->
+<mapper namespace="com.example.demo.mapper.UserMapper">
+<!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
+    <select id="get" parameterType="int" resultType="com.example.demo.model.UserModel">
+        select
+          id,name,age,address,username,password,email
+        from
+          user
+        where
+          id = #{id};
+    </select>
+<!--    在dao层中返回类型为String ，但是这样执行的sql语句返回的是不是String呢...-->
+    <select id="getName" parameterType="int" resultType="String">
+        select name from user where id = #{id};
+    </select>
+<!--    获取所有的信息-->
+    <select id="getAll" resultType="com.example.demo.model.UserModel">
+        select * from user;
+    </select>
+<!--    尝试在这里新增一个user,传入的参数是User的实体类对象,values要和数据库表的顺序对上-->
+    <select id="addUser" parameterType="com.example.demo.model.UserModel">
+        insert into user values(#{id},#{name},#{age},#{email},#{address},#{username},#{password});
+    </select>
+<!-- 更新User-->
+    <select id="updateUser" parameterType="com.example.demo.model.UserModel">
+        update user set
+        name=#{name},age=#{age},email=#{email},address=#{address},username=#{username},password=#{password}
+        where id=#{id}
+    </select>
+<!-- 删除User-->
+    <select id="deleteUser" parameterType="com.example.demo.model.UserModel">
+        delete from user where id=#{id}
+    </select>
+<!-- 根据Username来查找email-->
+    <select id="getEmail" resultType="String">
+        select email from user where username=#{username};
+    </select>
+<!-- 根据age来找usermodel-->
+    <select id="getUserByAge" parameterType="int" resultType="com.example.demo.model.UserModel">
+        select * from user where age=#{age};
+    </select>
+    <select id="findUser" resultType="com.example.demo.model.UserModel">
+        select * from user where username=#{username} and password=#{password}
+    </select>
+</mapper>
