@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.util.Date;
 
 /**
@@ -18,7 +19,9 @@ import java.util.Date;
  */
 @RestController
 public class HelloController {
-
+    //测试Druid
+    @Autowired
+    private DataSource dataSource;
     @RequestMapping("/hello")
     public String hello(HttpServletRequest request,@RequestParam("token") String token){
         //从请求头中获取jwt
@@ -33,6 +36,12 @@ public class HelloController {
         Date nowtime = new Date(); //返回的是当前时间
         System.out.println("nowtime is "+nowtime);
         return "Hello sakura!";
+    }
+    //测试druid
+    @RequestMapping("/test1")
+    public String test1(){
+        System.out.println(dataSource);
+        return "test1";
     }
 
 }
