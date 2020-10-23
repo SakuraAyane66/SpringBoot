@@ -71,6 +71,12 @@ spring:
         max-wait: -1
         # 最大连接活跃数，负数为不限制
         max-active: -1
+#mybatis配置，找到对应的文件
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.example.demo.model
+#日志配置
+logging:
+  config: src/main/resources/logback.xml
+  level:
+    com.example.demo.mapper: trace

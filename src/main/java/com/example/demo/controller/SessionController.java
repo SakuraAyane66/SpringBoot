@@ -48,8 +48,6 @@ public class SessionController {
         }
         return "账号或者密码错误！";
     }
-
-
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("user");

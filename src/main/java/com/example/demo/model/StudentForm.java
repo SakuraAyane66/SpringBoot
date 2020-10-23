@@ -14,7 +14,7 @@ public class StudentForm {
     private String country;
     private String name;
     private String password;
-    //新加了 token expireTime和LoginTime
+    //新加了 token expireTime和LoginTime (后面删除了，因为有问题，data时间转过来有问题)
     private String token;
     /**
      * token 过期时间
@@ -24,7 +24,9 @@ public class StudentForm {
      *  登录时间
      */
     private LocalDateTime loginTime;
-
+    /**
+     *  过期时间
+     */
     public LocalDateTime getExpireTime() {
         return expireTime;
     }
