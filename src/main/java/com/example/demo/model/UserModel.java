@@ -25,6 +25,26 @@ public class UserModel {
     private String username;
     private String password;
 
+
+    //这是使用resultMap的情况,
+    private String authorAddress;
+
+    public String getAuthorAddress() {
+        return authorAddress;
+    }
+
+    public void setAuthorAddress(String authorAddress) {
+        this.authorAddress = authorAddress;
+    }
+    //这是外部表的属性,名字与外表列对应
+//    private String addr;
+//    public String getAddr() {
+//        return addr;
+//    }
+//    public void setAddr(String addr) {
+//        this.addr = addr;
+//    }
+
     //快速构建构造方法,给之后新增等地方调用,构造函数参数的顺序必须与数据库中的字段顺序一样
     public UserModel(Integer id, String name,Integer age, String email, String address, String username, String password) {
         this.id = id;

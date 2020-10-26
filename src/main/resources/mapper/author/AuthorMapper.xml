@@ -23,4 +23,7 @@
     <select id="getAddsByIds" resultType="java.lang.String">
         select address from author where id&lt;=i and id&gt;=j;
     </select>
+<!--    <select id="getUserByAuthor" resultType="com.example.demo.model.UserModel">-->
+<!--        -->
+<!--    </select>-->
 </mapper>

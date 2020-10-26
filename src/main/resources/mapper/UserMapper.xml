@@ -45,6 +45,42 @@
         select * from user where age=#{age};
     </select>
     <select id="findUser" resultType="com.example.demo.model.UserModel">
-        select * from user where username=#{username} and password=#{password}
+        select * from user where username=#{username} and password=#{password};
     </select>
+
+
+
+ <!--与author表关联查询-->
+    <!--resultmap，type为主体类型-->
+    <resultMap id="UserAndAuthor" type="com.example.demo.model.UserModel">
+        <!--自定义映射，默认映射列名，在这儿指定了属性，
+        column=外表列名字，property为domain中列名映射的属性-->
+        <result column="addr" property="authorAddress"/>
+    </resultMap>
+    <!--在这里需要修改为resultMap加上id-->
+    <select id="getUsersAndAuthor" resultMap="UserAndAuthor">
+    SELECT
+	u.id,
+	u.name,
+	u.age,
+	u.email,
+	u.address,
+	u.username,
+	u.password,
+    au.addr
+    FROM user u LEFT JOIN author au ON u.id = au.user_id;
+    </select>
+    <!--这是不用resultMap的情况，resultType为userModel-->
+<!--    <select id="getUsersAndAuthor" resultType="com.example.demo.model.UserModel">-->
+<!--    SELECT-->
+<!--	u.id,-->
+<!--	u.name,-->
+<!--	u.age,-->
+<!--	u.email,-->
+<!--	u.address,-->
+<!--	u.username,-->
+<!--	u.password,-->
+<!--    au.addr-->
+<!--    FROM user u LEFT JOIN author au ON u.id = au.user_id;-->
+<!--    </select>-->
 </mapper>

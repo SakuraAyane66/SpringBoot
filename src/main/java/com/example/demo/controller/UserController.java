@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -98,5 +99,15 @@ public class UserController {
     public String nice(){
         return "hello sakura";
     }
+
+    @RequestMapping("/getUsersAndAuthor")
+    public List<UserModel> getUsersAndAuthor(){
+       List<UserModel> userModel = userService.getUsersAndAuthor();
+       for (UserModel u:userModel){
+           System.out.println(u);
+       }
+       return userModel;
+    }
+
 
 }

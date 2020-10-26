@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.model.UserModel;
+import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -29,5 +30,8 @@ public interface UserMapper {
 
     //根据username和password查询user
     UserModel findUser(String username,String password);
+
+    //测试，根据user的id关联到author的user_id查询，主要是返回user主体 //
+    List<UserModel> getUsersAndAuthor();  //int id //先注释看效果
 
 }

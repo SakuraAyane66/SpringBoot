@@ -82,4 +82,10 @@ public class UserService {
         UserModel user = userMapper.findUser(username,password);
         return user;
     }
+
+    //测试连表查询
+    public List<UserModel> getUsersAndAuthor(){
+        List<UserModel> userModel = userMapper.getUsersAndAuthor();
+        return userModel;
+    }
 }

@@ -77,6 +77,9 @@ mybatis:
   mapper-locations: classpath:mapper/**/*Mapper.xml
   #这句话的意思其实是搜索指定包
   type-aliases-package: com.example.demo.model
+  #加在全局的配置文件
+#  configuration: classpath:mapper/mybatis-config.xml
+#  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #日志配置
 logging:
   config: src/main/resources/logback.xml
