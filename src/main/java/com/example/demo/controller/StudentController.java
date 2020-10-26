@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.DemoApplication;
 import com.example.demo.model.StudentForm;
 import com.example.demo.model.UserModel;
 import com.example.demo.service.StudentService;
 import com.example.demo.service.UserService;
 import org.omg.CORBA.PUBLIC_MEMBER;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +22,8 @@ import java.util.List;
  */
 @RestController
 public class StudentController {
+    //日志使用
+    private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
     @Autowired
     private StudentService studentService;
     //必须加上注解才能加入到Ioc容器，然后让他统一管理
