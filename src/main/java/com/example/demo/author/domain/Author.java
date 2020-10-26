@@ -25,7 +25,8 @@ public class Author {
     //伪字段，不在数据库表中的字段
     //userModel对象
     private UserModel user;
-
+    //无参构造器
+    public Author(){};
     //形参构造器
     public Author(Integer id, String name, Integer user_id, String address) {
         this.id = id;

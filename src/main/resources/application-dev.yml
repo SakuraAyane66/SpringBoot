@@ -73,7 +73,9 @@ spring:
         max-active: -1
 #mybatis配置，找到对应的文件
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
+  #配置mapper的扫描，找到所有的mapper.xml映射文件 ，与之前的mapper/*Mapper.xml相比中间加了 **/
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  #这句话的意思其实是搜索指定包
   type-aliases-package: com.example.demo.model
 #日志配置
 logging:

@@ -3,9 +3,12 @@ package com.example.demo.author.service.impl;
 import com.example.demo.author.domain.Author;
 import com.example.demo.author.mapper.AuthorMapper;
 import com.example.demo.author.service.AuthorService;
+import com.example.demo.mapper.StudentMapper;
 import com.example.demo.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -13,8 +16,10 @@ import java.util.List;
  * <p>Author具体的实现 </p>
  * 创建日期：2020-10-23 17:48
  */
-public class AuthorServiceImpl extends AuthorService {
-    @Autowired
+//实现service的接口
+@Service
+public class AuthorServiceImpl implements AuthorService {
+    @Resource
     private AuthorMapper mapper;
     //获取所有的author信息
     @Override
@@ -26,7 +31,6 @@ public class AuthorServiceImpl extends AuthorService {
     @Override
     public Author getAuthorById(Author author) {
         Author author1 = mapper.getAuthorById(author);
-
         return author1;
     }
     //通过author获取地址
@@ -46,4 +50,5 @@ public class AuthorServiceImpl extends AuthorService {
         List<String> adds = mapper.getAddsByIds(i,j);
         return adds;
     }
+
 }

@@ -21,6 +21,6 @@
     </select>
     <!--根据id范围查询所有的地址,按照id顺序排序,因为大于小于要转义-->
     <select id="getAddsByIds" resultType="java.lang.String">
-        select address from author where id &lt;=i and &gt;=j;
+        select address from author where id&lt;=i and id&gt;=j;
     </select>
 </mapper>

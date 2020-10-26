@@ -1,8 +1,8 @@
 package com.example.demo.mapper;
 
+import com.example.demo.author.domain.Author;
 import com.example.demo.model.StudentForm;
 import com.example.demo.model.UserModel;
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
