@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.base.AjaxResult;
+import com.example.demo.common.base.BaseController;
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
 import org.omg.CORBA.PUBLIC_MEMBER;
@@ -18,7 +20,7 @@ import java.util.List;
  */
 @RestController
 //@RequestMapping("/testController")
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     private UserService userService;   //service层
 //    @RequestMapping("/get.action")   //路径映射
@@ -99,15 +101,26 @@ public class UserController {
     public String nice(){
         return "hello sakura";
     }
-
+    //resultMap测试类
     @RequestMapping("/getUsersAndAuthor")
     public List<UserModel> getUsersAndAuthor(){
        List<UserModel> userModel = userService.getUsersAndAuthor();
        for (UserModel u:userModel){
            System.out.println(u);
        }
+       AjaxResult json = success("成功!了！");
+       System.out.println("json会是什么呢？"+json);
        return userModel;
     }
 
-
+    @RequestMapping("/getUsersAndAuthor1")
+    public AjaxResult getUsersAndAuthor1(){
+        List<UserModel> userModel = userService.getUsersAndAuthor();
+        for (UserModel u:userModel){
+            System.out.println(u);
+        }
+        AjaxResult json = success("成功!了！",userModel);
+        System.out.println("json会是什么呢？"+json);
+        return json;
+    }
 }

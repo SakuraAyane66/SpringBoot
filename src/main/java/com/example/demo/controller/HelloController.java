@@ -1,15 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.utils.JwtUtil;
+import com.example.demo.common.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 /**
@@ -42,6 +38,12 @@ public class HelloController {
     public String test1(){
         System.out.println(dataSource);
         return "test1";
+    }
+    //测试pathVaribale注解，解析路径中的{}
+    @GetMapping("/edit/{userId}")
+    public String edit(@PathVariable("userId") int userId){
+        System.out.println("映射的userID为"+userId);
+        return "sakura";
     }
 
 }

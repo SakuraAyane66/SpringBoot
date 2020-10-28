@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.config.LoginInterceptor;
+import com.example.demo.common.interceptor.LoginInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.springframework.boot.SpringApplication;
@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,7 +19,8 @@ import org.slf4j.LoggerFactory;
 @EnableCaching  //这是缓存的启动注解，开启缓存
 @EnableTransactionManagement   /// 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 public class DemoApplication implements WebMvcConfigurer { //让启动类实现了接口开启全局的token验证
-    //启动日志
+    //启动日志,如果是静态的加上了static ，那么不能调用Object 的getClass()方法，所以在getLogger里面不能使用
+    //如果没有加static ，那么Logger里面可以用getClass()方法
     private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
     public static void main(String[] args) {
@@ -32,9 +32,16 @@ public class DemoApplication implements WebMvcConfigurer { //让启动类实现�
         //使用日志
         logger.info("SpringBoot开始加载");
         registration.addInterceptor(new LoginInterceptor());
+
         //使用日志
         logger.info("SpringBoot加载完毕");
         System.out.println("恭喜！Alice已经启动成功了，sakura！");
+
+        //Object s = getClass();
+//        Object d= DemoApplication.class;
+//        System.out.println("这个object是啥"+s);
+//        System.out.println("这又是啥"+d);
+//        System.out.println("是否相等"+s==d);
     }
 
 }

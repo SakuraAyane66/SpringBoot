@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
-import com.example.demo.utils.JwtUtil;
+import com.example.demo.common.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
