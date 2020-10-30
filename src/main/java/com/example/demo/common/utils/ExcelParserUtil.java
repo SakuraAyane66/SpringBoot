@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author CTL
  * <p>excel方便调用的工具类 </p>
+ * 就是根据获取到上传文件全名的路径来判断是不是excel文件，主要是根据后缀名
  * 创建日期：2020-10-30 10:03
  */
 public class ExcelParserUtil {
@@ -32,7 +33,9 @@ public class ExcelParserUtil {
      * @return
      */
     public static boolean validateExcel(String filePath){
-        if (filePath == null || !(isExcel2003(filePath) || isExcel2007(filePath))){
+        //没问题，我有问题，后面的括号范围之前看错了,那没事了
+        if (filePath == null || !(   isExcel2003(filePath) || isExcel2007(filePath)  )){
+            System.out.println("返回false"+false);
             return false;
         }
         return true;
