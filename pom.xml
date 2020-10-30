@@ -78,11 +78,11 @@
             <version>1.1.15</version>
         </dependency>
         <!--日志的依赖包-->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.15</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>log4j</groupId>-->
+<!--            <artifactId>log4j</artifactId>-->
+<!--            <version>1.2.15</version>-->
+<!--        </dependency>-->
         <!--使用这个自带了slf4j日志记录-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -93,6 +93,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <!--引入excel依赖包，poi-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.16</version>
+        </dependency>
+
     </dependencies>
 
     <build>

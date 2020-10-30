@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * 切面，是自定义注解对应的切面
  */
 @Aspect //表示这是一个切面类
-@Component
+//@Component
 @SuppressWarnings({"unused"})  //忽略的警告
 public class AliceAspect {
     //引入slf4j的Logger

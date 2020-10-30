@@ -2,7 +2,9 @@ package com.example.demo.author.controller;
 
 import com.example.demo.DemoApplication;
 import com.example.demo.author.domain.Author;
+import com.example.demo.author.service.AuthorService;
 import com.example.demo.author.service.impl.AuthorServiceImpl;
+import com.example.demo.model.UserModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.lang.annotation.Retention;
 import java.util.List;
 
 /**
@@ -26,7 +29,7 @@ public class AuthorController {
     private static final Logger logger = LoggerFactory.getLogger(AuthorController.class);
     @Autowired
     //  @Resource(name = "Author")  //注入实体service的名字，可以根据这个切换数据源，所以有设计impl和接口的必要
-    private AuthorServiceImpl authorService;
+    private AuthorService authorService;
 
     @RequestMapping("/getAddsByIds")
     public List<String> getAddsByIds(@RequestParam("i") int i,@RequestParam("j") int j) {
@@ -51,5 +54,16 @@ public class AuthorController {
         author.setId(i);
         Author author1 = authorService.getAuthorById(author);
         return author1;
+    }
+    //返回userModel，根据Author
+    @RequestMapping("/getUserByAuthor")
+    public Author getUserByAuthor(@RequestParam("id") int id,
+                                     @RequestParam("name") String name,
+                                     @RequestParam("userid") int user_id,
+                                     @RequestParam("addr") String addr){
+        Author author = new Author(id,name,user_id,addr);
+        Author userModel = authorService.getUserByAuthor(author);
+        System.out.println("userModel是"+userModel);
+        return userModel;
     }
 }

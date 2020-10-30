@@ -41,8 +41,10 @@ public class AuthorServiceImpl implements AuthorService {
     }
     //关键！！通过author获取到user的信息
     @Override
-    public UserModel getUserByAuthor(Author author) {
-        return null;
+    public Author getUserByAuthor(Author author) {
+        //直接返回userModel
+        Author userModel = mapper.getUserByAuthor(author);
+        return userModel;
     }
     //通过i,j获取到相应范围内的address
     @Override
@@ -50,5 +52,4 @@ public class AuthorServiceImpl implements AuthorService {
         List<String> adds = mapper.getAddsByIds(i,j);
         return adds;
     }
-
 }

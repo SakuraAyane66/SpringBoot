@@ -16,5 +16,5 @@ public interface AuthorService {
         public List<String> getAddsByIds(int i,int j);
 
         //重点：根据对象查询外键表user_id对应的user对象内容
-        public UserModel getUserByAuthor(Author author);
+        public Author getUserByAuthor(Author author);
 }

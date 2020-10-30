@@ -52,7 +52,6 @@ spring:
       wall:
         config:
           multi-statement-allow: true
-
   cache:
     type: redis
   redis:
@@ -71,6 +70,13 @@ spring:
         max-wait: -1
         # 最大连接活跃数，负数为不限制
         max-active: -1
+  #配置文件上传大小的限制,改为50mb
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
 #mybatis配置，找到对应的文件
 mybatis:
   #配置mapper的扫描，找到所有的mapper.xml映射文件 ，与之前的mapper/*Mapper.xml相比中间加了 **/

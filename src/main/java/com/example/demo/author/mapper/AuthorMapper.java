@@ -19,6 +19,10 @@ public interface AuthorMapper {
     public List<String> getAddsByIds(int i,int j);
 
     //重点：根据对象查询外键表user_id对应的user对象内容
-    public UserModel getUserByAuthor(Author author);
+    public Author getUserByAuthor(Author author);
 
+    //模糊多条件查询，都是有才变成查询的限制条件，没有那么就直接查询
+    //参数 a_i,a_j author的id范围，a_name 包含name字段！！
+    // u_i,u_j user表的id范围，String addr 如果有则必须与user中的address相同
+    public List<Author> findByMany(int a_i,int a_j,String a_name,int u_i,int u_j,String addr);
 }

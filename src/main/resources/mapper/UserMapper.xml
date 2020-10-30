@@ -57,7 +57,7 @@
         column=外表列名字，property为domain中列名映射的属性-->
         <result column="addr" property="authorAddress"/>
     </resultMap>
-    <!--在这里需要修改为resultMap加上id-->
+    <!--在这里需要修改为resultMap加上id,-->
     <select id="getUsersAndAuthor" resultMap="UserAndAuthor">
     SELECT
 	u.id,
