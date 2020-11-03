@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace对应的是mapper/dao层的地址-->
+<mapper namespace="com.example.demo.update.mapper.ExcelUserMapper">
+    <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
+   <select id="">
+
+   </select>
+    <insert id="addUser" parameterType="com.example.demo.update.domain.User">
+        insert into user values(#{id},#{name},#{age},#{email},#{address},#{username},#{password});
+    </insert>
+    <!--批量插入,collection里面的对应的是mapper里的参数名-->
+    <insert id="addUsers" parameterType="java.util.List">
+        insert into user values
+        <foreach collection="users" item="item" index="index" separator=",">
+            (#{item.id},#{item.name},#{item.age},#{item.email},
+            #{item.address},#{item.username},#{item.password})
+        </foreach>
+    </insert>
+</mapper>

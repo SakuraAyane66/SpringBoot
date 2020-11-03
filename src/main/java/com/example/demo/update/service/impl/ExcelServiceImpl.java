@@ -3,7 +3,10 @@ package com.example.demo.update.service.impl;
 import com.example.demo.common.utils.DateTransUtil;
 import com.example.demo.common.utils.ExcelParserUtil;
 import com.example.demo.common.utils.FileSaveUtil;
+import com.example.demo.mapper.UserMapper;
+import com.example.demo.model.UserModel;
 import com.example.demo.update.domain.User;
+import com.example.demo.update.mapper.ExcelUserMapper;
 import com.example.demo.update.service.ExcelService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -12,10 +15,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,14 +38,12 @@ import java.util.List;
 public class ExcelServiceImpl implements ExcelService {
     //日志功能
     private static Logger logger = LoggerFactory.getLogger(ExcelService.class);
-//    @Override
-//    public void downLoadExcel(HttpServletResponse response) {
-//
-//    }
-//    @Override
-//    public ResponseEntity fileUpload(MultipartFile file) {
-//        return null;
-//    }
+    //插入excelUserMapper，调用user插入数据
+    @Resource
+    private ExcelUserMapper mapper;
+//    @Autowired
+//    private UserMapper userMapper;
+
     //重写接口的方法，这里是真实的业务逻辑
     @Override
     public String parseExcel(MultipartFile file) throws Exception {
@@ -116,11 +120,13 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
     //解析表单的方法
+    @Transactional(rollbackFor = Exception.class) //有数据库操作，添加了事务
     public List<User> readExcel(Workbook wb){
         String errMsg="出现错误！请排查";
         //解析数据转为user对象
         List<User> list = new ArrayList<>();
         Sheet sheet0 = wb.getSheetAt(0);
+        int count = 0; //返回数据库插入条数记录
         int totalRows = sheet0.getPhysicalNumberOfRows(); //总行数
         int totalCells = 0; //总列数
         //totalCells = sheet0.getRow(0).getPhysicalNumberOfCells(); //算的是第1行的cells参数为0
@@ -144,8 +150,16 @@ public class ExcelServiceImpl implements ExcelService {
             User user = new User(cell1,cell2,cell3,cell4,cell5,cell6,cell7);
             System.out.println("user是啥"+user);
             list.add(user);
+            //循环的时候是在这里插入数据
+            //int ss = mapper.addUser(user);
+            //count+=ss;
+            //用之前的usermodel 插入
+            //UserModel userModel = new UserModel(cell1,cell2,cell3,cell4,cell5,cell6,cell7);
+            //userMapper.addUser(userModel);
             System.out.println("List是"+list);
         }
+        count = mapper.addUsers(list);
+        System.out.println("总记录条数为"+count);
         return null;
     }
 }
