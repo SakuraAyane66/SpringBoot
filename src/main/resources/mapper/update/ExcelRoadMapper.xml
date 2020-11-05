@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.update.mapper.ExcelRoadInformationMapper">
+    <!--批量插入-->
+    <insert id="addRoads" parameterType="java.util.List">
+        insert into road_information values
+        <foreach collection="roads" item="item" index="index" separator=",">
+            (#{item.order_number},#{item.x},#{item.y},#{item.type},
+            #{item.lat},#{item.lon},#{item.method},#{item.surface},#{item.up},
+            #{item.down},#{item.bottom},#{item.belong})
+        </foreach>
+    </insert>
+    <!--批量更新-->
+
+    <!--批量删除-->
+
+    <!--
+    -->
+</mapper>
