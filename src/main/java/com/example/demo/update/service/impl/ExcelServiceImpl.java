@@ -128,8 +128,10 @@ public class ExcelServiceImpl implements ExcelService {
         String errMsg="readExcel出现错误！请排查";
         //解析数据转为user对象
         List<User> list = new ArrayList<>();
-        List<User> list1 = new ArrayList<>(); //批量更新数组
-        List<User> list2 = new ArrayList<>(); //批量插入数组
+//        List<User> list1 = new ArrayList<>(); //批量更新数组
+//        List<User> list2 = new ArrayList<>(); //批量插入数组
+        List<User> list1 = new ArrayList<>(); //差集数组1
+        List<User> list2 = new ArrayList<>(); //差集数组2
         Sheet sheet0 = wb.getSheetAt(0);
         int count = 0; //返回数据库插入条数记录
         int totalRows = sheet0.getPhysicalNumberOfRows(); //总行数
@@ -160,26 +162,26 @@ public class ExcelServiceImpl implements ExcelService {
         }
 
         //循环遍历list，进行判断主键是否存在 ，也不需要这种写法了
-        for(User item:list){
-            System.out.println("item是"+item);
-            int is= mapper.isExist(item);
-            System.out.println(item+"的is是"+is);
-            if(is>0){
-                list1.add(item);
-            }else {
-                list2.add(item);
-            }
-        }
-        System.out.println("list1"+list1);
-        System.out.println("===========================================");
-        System.out.println("list2"+list2);
-        System.out.println(!list1.isEmpty());
-        if(!list1.isEmpty()){
-           count = mapper.updateUsers(list1);
-        }
-        if(!list2.isEmpty()){
-            mapper.addUsers(list2);
-        }
+//        for(User item:list){
+//            System.out.println("item是"+item);
+//            int is= mapper.isExist(item);
+//            System.out.println(item+"的is是"+is);
+//            if(is>0){
+//                list1.add(item);
+//            }else {
+//                list2.add(item);
+//            }
+//        }
+//        System.out.println("list1"+list1);
+//        System.out.println("===========================================");
+//        System.out.println("list2"+list2);
+//        System.out.println(!list1.isEmpty());
+//        if(!list1.isEmpty()){
+//           count = mapper.updateUsers(list1);
+//        }
+//        if(!list2.isEmpty()){
+//            mapper.addUsers(list2);
+//        }
         System.out.println("====================");
         //获取数据库中存在的集合，根据belong所属项目，实际就是通过文件生成的uuid或者说是用户自定义的唯一文件判断标识
         //这个可以通过服务器端解析获取，里面的参数
@@ -187,10 +189,15 @@ public class ExcelServiceImpl implements ExcelService {
         System.out.println("数据库中存在的users："+ll);
         System.out.println("====================");
         //取交集，非空的时候交集部分执行更新操作
-//        if(!UpUtil.sameList(ll,list).isEmpty()){
-//            mapper.updateUsers(UpUtil.sameList(ll,list)); //
-//        }
-
+        if(!UpUtil.sameList(ll,list).isEmpty()){
+            mapper.updateUsers(UpUtil.sameList(ll,list)); //
+        }
+        list1 = UpUtil.diffList(list,ll);
+        System.out.println("list1的差集为"+list1);  //list1是需要新增的，参数先导入的list就是需要增加的
+        list2 = UpUtil.diffList(ll,list);
+        System.out.println("list2的差集为"+list2);  //list2是需要删除的
+        mapper.addUsers(list1);
+        mapper.deleteUsers(list2);
         System.out.println("总记录条数为"+count);
         return null;
     }
