@@ -3,6 +3,7 @@ package com.example.demo.update.service.impl;
 import com.example.demo.common.utils.DateTransUtil;
 import com.example.demo.common.utils.ExcelParserUtil;
 import com.example.demo.common.utils.FileSaveUtil;
+import com.example.demo.common.utils.UpUtil;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.UserModel;
 import com.example.demo.update.domain.User;
@@ -71,6 +72,7 @@ public class ExcelServiceImpl implements ExcelService {
             fileDir.mkdirs();
         }
         //拼接保存文件的全名,前面是年月日小时分秒
+        //前面最好加该文件所属项目的名称
         File fileNew = new File(fileDir, DateTransUtil.getDateTime(System.currentTimeMillis())+ "--"+ fileName);
         file.transferTo(fileNew);
         //创建输入流
@@ -120,11 +122,14 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
     //解析表单的方法
+    @Override
     @Transactional(rollbackFor = Exception.class) //有数据库操作，添加了事务
     public List<User> readExcel(Workbook wb){
-        String errMsg="出现错误！请排查";
+        String errMsg="readExcel出现错误！请排查";
         //解析数据转为user对象
         List<User> list = new ArrayList<>();
+        List<User> list1 = new ArrayList<>(); //批量更新数组
+        List<User> list2 = new ArrayList<>(); //批量插入数组
         Sheet sheet0 = wb.getSheetAt(0);
         int count = 0; //返回数据库插入条数记录
         int totalRows = sheet0.getPhysicalNumberOfRows(); //总行数
@@ -147,19 +152,51 @@ public class ExcelServiceImpl implements ExcelService {
             String cell5 = row.getCell(4).getStringCellValue();
             String cell6 = row.getCell(5).getStringCellValue();
             String cell7 = row.getCell(6).getStringCellValue();
-            User user = new User(cell1,cell2,cell3,cell4,cell5,cell6,cell7);
-            System.out.println("user是啥"+user);
+            int cell8 = (int)row.getCell(7).getNumericCellValue(); //转为int
+            User user = new User(cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8);
+            //将user添加进批量操作的list里
             list.add(user);
-            //循环的时候是在这里插入数据
-            //int ss = mapper.addUser(user);
-            //count+=ss;
-            //用之前的usermodel 插入
-            //UserModel userModel = new UserModel(cell1,cell2,cell3,cell4,cell5,cell6,cell7);
-            //userMapper.addUser(userModel);
             System.out.println("List是"+list);
         }
-        count = mapper.addUsers(list);
+
+        //循环遍历list，进行判断主键是否存在 ，也不需要这种写法了
+        for(User item:list){
+            System.out.println("item是"+item);
+            int is= mapper.isExist(item);
+            System.out.println(item+"的is是"+is);
+            if(is>0){
+                list1.add(item);
+            }else {
+                list2.add(item);
+            }
+        }
+        System.out.println("list1"+list1);
+        System.out.println("===========================================");
+        System.out.println("list2"+list2);
+        System.out.println(!list1.isEmpty());
+        if(!list1.isEmpty()){
+           count = mapper.updateUsers(list1);
+        }
+        if(!list2.isEmpty()){
+            mapper.addUsers(list2);
+        }
+        System.out.println("====================");
+        //获取数据库中存在的集合，根据belong所属项目，实际就是通过文件生成的uuid或者说是用户自定义的唯一文件判断标识
+        //这个可以通过服务器端解析获取，里面的参数
+        List<User> ll=mapper.getUsers(1);
+        System.out.println("数据库中存在的users："+ll);
+        System.out.println("====================");
+        //取交集，非空的时候交集部分执行更新操作
+//        if(!UpUtil.sameList(ll,list).isEmpty()){
+//            mapper.updateUsers(UpUtil.sameList(ll,list)); //
+//        }
+
         System.out.println("总记录条数为"+count);
+        return null;
+    }
+
+    @Override
+    public List<User> getUsers(int i){
         return null;
     }
 }

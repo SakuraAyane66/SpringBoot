@@ -29,7 +29,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/alice?serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/alice?serverTimezone=UTC&useSSL=false&allowMultiQueries=true
     type: com.alibaba.druid.pool.DruidDataSource
     #后面是修改的druid修改的配置
     initialSize: 5

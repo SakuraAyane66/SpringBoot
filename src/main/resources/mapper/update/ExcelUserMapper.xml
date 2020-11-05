@@ -6,18 +6,67 @@
 <!--namespace对应的是mapper/dao层的地址-->
 <mapper namespace="com.example.demo.update.mapper.ExcelUserMapper">
     <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
-   <select id="">
-
-   </select>
     <insert id="addUser" parameterType="com.example.demo.update.domain.User">
-        insert into user values(#{id},#{name},#{age},#{email},#{address},#{username},#{password});
+        insert into users values(#{id},#{name},#{age},#{email},#{address},#{username},#{password},#{belong});
     </insert>
     <!--批量插入,collection里面的对应的是mapper里的参数名-->
     <insert id="addUsers" parameterType="java.util.List">
-        insert into user values
+        insert into users values
         <foreach collection="users" item="item" index="index" separator=",">
             (#{item.id},#{item.name},#{item.age},#{item.email},
-            #{item.address},#{item.username},#{item.password})
+            #{item.address},#{item.username},#{item.password},#{item.belong})
         </foreach>
     </insert>
+    <!--批量跟新和插入,一般项目不会用这种方法-->
+    <insert id="updateUsersPlus" parameterType="java.util.List">
+        insert into users values
+            <foreach collection="users" item="item" index="index" separator=",">
+                (#{item.id},#{item.name},#{item.age},#{item.email},
+                #{item.address},#{item.username},#{item.password})
+            </foreach>
+        ON DUPLICATE KEY UPDATE
+        name=values(name),age = values(age),email=values(email),address=values(address),username=values(username),
+        password=values(password);
+    </insert>
+    <select id="isExist" parameterType="com.example.demo.update.domain.User" resultType="Integer">
+         select count(*) from users where id=#{id} ;
+    </select>
+    <!--批量更新语句-->
+    <update id="updateUsers" parameterType="java.util.List">
+        <foreach collection="users" item="item" index="index" separator=";">
+            update users
+            <set>
+              <if test="item.name!=null">
+                  name=#{item.name},
+              </if>
+              <if test="item.age>0">
+                age = #{item.age},
+              </if>
+              <if test="item.email!=null">
+                email= #{item.email},
+              </if>
+              <if test="item.address!=null">
+                address= #{item.address},
+              </if>
+              <if test="item.username!=null">
+                username= #{item.username},
+              </if>
+              <if test="item.belong!=null">
+                belong = #{item.belong}
+              </if>
+            </set>
+            where id = #{item.id}
+        </foreach>
+    </update>
+    <!--根据belong的id找到上传的excel属于哪一个文件-->
+    <select id="getUsers" resultType="com.example.demo.update.domain.User">
+            select * from users where belong = #{belong}
+    </select>
+    <!--nice，最终写法,可以批量删除了-->
+    <delete id="deleteUsers" parameterType="java.util.List">
+        delete from users where id in
+        (<foreach collection="users" item="item" index="index" separator=",">
+        #{item.id}
+         </foreach>)
+    </delete>
 </mapper>

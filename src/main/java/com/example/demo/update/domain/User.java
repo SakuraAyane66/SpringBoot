@@ -19,8 +19,18 @@ public class User extends BaseEntity implements Serializable {
     private String address;
     private String username;
     private String password;
+    private int belong; //新增了所属文件，用于判断excel数据在数据库的唯一标识
     public User(){};
-    public User(Integer id, String name, int age, String email, String address, String username, String password) {
+
+    public int getBelong() {
+        return belong;
+    }
+
+    public void setBelong(int belong) {
+        this.belong = belong;
+    }
+
+    public User(Integer id, String name, int age, String email, String address, String username, String password, int belong) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -28,6 +38,7 @@ public class User extends BaseEntity implements Serializable {
         this.address = address;
         this.username = username;
         this.password = password;
+        this.belong = belong;
     }
 
     public Integer getId() {
