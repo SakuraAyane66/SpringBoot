@@ -5,17 +5,55 @@
 <mapper namespace="com.example.demo.update.mapper.ExcelRoadInformationMapper">
     <!--批量插入-->
     <insert id="addRoads" parameterType="java.util.List">
-        insert into road_information values
+        insert into road_information(order_number,stake_number,x_coordinate,
+        y_coordinate,type,lat,lon,method,surface,up,down,bottom,belong) values
         <foreach collection="roads" item="item" index="index" separator=",">
-            (#{item.order_number},#{item.x},#{item.y},#{item.type},
+            (#{item.order_number},#{item.stake_number},#{item.x},#{item.y},#{item.type},
             #{item.lat},#{item.lon},#{item.method},#{item.surface},#{item.up},
             #{item.down},#{item.bottom},#{item.belong})
         </foreach>
     </insert>
     <!--批量更新-->
-
+    <update id="updateRoads" parameterType="java.util.List">
+        <foreach collection="roads" item="item" index="index" separator=";">
+            update users
+            <set>
+                <if test="item.order_number!=null">
+                    order_number=#{item.order_number},
+                </if>
+                <if test="item.stake_number!=null">
+                    stake_number = #{item.stake_number},
+                </if>
+                <if test="item.x!=null">
+                    x_coordinate= #{item.x},
+                </if>
+                <if test="item.y!=null">
+                    y_coordinate= #{item.y},
+                </if>
+                <if test="item.username!=null">
+                    type= #{item.type},
+                </if>
+                <if test="item.belong!=null">
+                    belong = #{item.belong}
+                </if>
+            </set>
+            where id = #{item.id}
+        </foreach>
+    </update>
     <!--批量删除-->
 
-    <!--
+    <!--private int order_number; //序号
+    private String stake_number;
+    private double x;  //x坐标
+    private double y;  //y坐标
+    private String type; //类型
+    private double lat; //经纬度
+    private double lon; //经纬度
+    private String method; //填方or挖方
+    private double surface; //面层宽度
+    private double up; //上基层宽度
+    private double down; //下基层宽度
+    private double bottom; //底基层宽度
+    private int belong;  //属于什么编号（判断具体是那一次表提交的记录的标识）
     -->
 </mapper>

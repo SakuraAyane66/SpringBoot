@@ -8,7 +8,17 @@ package com.example.demo.update.domain;
 public class RoadInformation {
     private Integer id; //主键，唯一id
     private int order_number; //序号
+    private String stake_number;
     private double x;  //x坐标
+
+    public String getStake_number() {
+        return stake_number;
+    }
+
+    public void setStake_number(String stake_number) {
+        this.stake_number = stake_number;
+    }
+
     private double y;  //y坐标
     private String type; //类型
     private double lat; //经纬度
@@ -20,10 +30,11 @@ public class RoadInformation {
     private double bottom; //底基层宽度
     private int belong;  //属于什么编号（判断具体是那一次表提交的记录的标识）
 
-    public RoadInformation(int order_number, double x, double y, String type, double lat,
-                           double lon, String method, double surface, double up, double down,
-                           double bottom, int belong) {
+    public RoadInformation(int order_number, String stake_number, double x, double y, String type,
+                           double lat, double lon, String method, double surface,
+                           double up, double down, double bottom, int belong) {
         this.order_number = order_number;
+        this.stake_number = stake_number;
         this.x = x;
         this.y = y;
         this.type = type;
@@ -140,12 +151,13 @@ public class RoadInformation {
     public void setBelong(int belong) {
         this.belong = belong;
     }
-    //还是方便
+
     @Override
     public String toString() {
         return "RoadInformation{" +
                 "id=" + id +
                 ", order_number=" + order_number +
+                ", stake_number='" + stake_number + '\'' +
                 ", x=" + x +
                 ", y=" + y +
                 ", type='" + type + '\'' +
