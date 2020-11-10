@@ -14,6 +14,7 @@
     <name>demo</name>
     <description>Demo project for Spring Boot</description>
 
+    <!--管理依赖版版本的配置，在这里声明，在下面使用中通过变量使用，之后修改版本，在这儿修改就能全部进行修改了    -->
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -99,7 +100,10 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.16</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

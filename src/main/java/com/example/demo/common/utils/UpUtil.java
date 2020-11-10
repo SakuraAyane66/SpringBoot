@@ -1,5 +1,6 @@
 package com.example.demo.common.utils;
 
+import com.example.demo.update.domain.RoadInformation;
 import com.example.demo.update.domain.User;
 
 import java.util.List;
@@ -26,6 +27,25 @@ public class UpUtil {
     public static List<User> diffList(List<User> firstList,List<User> secondList){
         List<User> resultList = firstList.stream()
                 .filter(item -> !secondList.stream().map(e -> e.getId())
+                        .collect(Collectors.toList()).contains(item.getId()))
+                .collect(Collectors.toList());
+        return resultList;
+    }
+
+    //RoadInformation的交集和差集
+    //取交集
+    public static List<RoadInformation> sameRoadList(List<RoadInformation> oldList, List<RoadInformation> newList){
+        List<RoadInformation> resultList = oldList.stream()
+                .filter(item -> newList.stream().map(e -> e.getOrder_number())  //这里的getId为编码的唯一属性
+                        .collect(Collectors.toList()).contains(item.getId()))
+                .collect(Collectors.toList());
+        return resultList;
+    }
+
+    //取差集
+    public static List<RoadInformation> diffRoadList(List<RoadInformation> firstList,List<RoadInformation> secondList){
+        List<RoadInformation> resultList = firstList.stream()
+                .filter(item -> !secondList.stream().map(e -> e.getOrder_number())
                         .collect(Collectors.toList()).contains(item.getId()))
                 .collect(Collectors.toList());
         return resultList;

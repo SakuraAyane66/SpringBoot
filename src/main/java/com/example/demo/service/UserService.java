@@ -27,8 +27,8 @@ public class UserService {
     RedisTemplate redisTemplate;
     //返回根据id查询结果的对象
     public UserModel get(int id){//尝试在这里从上下文中username的获取
-        String currentUsername = UserContext.getCurrentUserName();
-        System.out.println("username"+currentUsername);
+//        String currentUsername = UserContext.getCurrentUserName();
+//        System.out.println("username"+currentUsername);
         return userMapper.get(id);
     }
     //获取所有数据

@@ -44,6 +44,9 @@ public class UserModel {
 //    public void setAddr(String addr) {
 //        this.addr = addr;
 //    }
+    //无参构造器
+    public UserModel() {
+    }
 
     //快速构建构造方法,给之后新增等地方调用,构造函数参数的顺序必须与数据库中的字段顺序一样
     public UserModel(Integer id, String name,Integer age, String email, String address, String username, String password) {

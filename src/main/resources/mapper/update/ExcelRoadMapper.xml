@@ -41,7 +41,17 @@
         </foreach>
     </update>
     <!--批量删除-->
-
+    <delete id="deleteRoads" parameterType="java.util.List">
+        delete from road_information where id in
+        (<foreach collection="roads" item="item" index="index" separator=",">
+            #{item.id}
+         </foreach>
+        )
+    </delete>
+    <!--批量查询，根据belong的i查询-->
+     <select id="getRoads" resultType="com.example.demo.update.domain.RoadInformation">
+        select * from road_information where belong = #{i};
+     </select>
     <!--private int order_number; //序号
     private String stake_number;
     private double x;  //x坐标

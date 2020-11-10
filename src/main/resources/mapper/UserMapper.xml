@@ -8,7 +8,7 @@
 <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
     <select id="get" parameterType="int" resultType="com.example.demo.model.UserModel">
         select
-          id,name,age,address,username,password,email
+          id,name,age,email,address,username,password
         from
           user
         where

@@ -29,7 +29,7 @@ public class RoadInformation {
     private double down; //下基层宽度
     private double bottom; //底基层宽度
     private int belong;  //属于什么编号（判断具体是那一次表提交的记录的标识）
-
+    public RoadInformation(){};
     public RoadInformation(int order_number, String stake_number, double x, double y, String type,
                            double lat, double lon, String method, double surface,
                            double up, double down, double bottom, int belong) {

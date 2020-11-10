@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -7,7 +8,7 @@ import java.time.LocalDateTime;
  * <p>studentname实体类 </p>
  * 创建日期：2020-10-16 10:28
  */
-public class StudentForm {
+public class StudentForm implements Serializable {
     private int id;
     private String account;
     private int age;

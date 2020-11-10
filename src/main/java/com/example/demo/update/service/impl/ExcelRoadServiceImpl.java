@@ -79,6 +79,10 @@ public class ExcelRoadServiceImpl implements ExcelRoadService {
             System.out.println("excel版本是2007");
         }
 
+        //根据i查询记录
+        List<RoadInformation> roadInformations =mapper.getRoads(1);
+
+
         //获取总表的数目（总sheets的数目）
         int totalSheets = wb.getNumberOfSheets();   //这个方法可以获取到sheets的总数目
         List<RoadInformation> list = readRoadExcel(wb);
@@ -91,9 +95,12 @@ public class ExcelRoadServiceImpl implements ExcelRoadService {
     public List<RoadInformation> readRoadExcel(Workbook wb) {
         String errMsg="readExcel出现错误！请排查";
         //解析数据转为user对象
-        List<RoadInformation> list = new ArrayList<>();
+        List<RoadInformation> list = new ArrayList<>();  //list的服务器读取数组
+
         List<RoadInformation> list1 = new ArrayList<>(); //差集数组1
         List<RoadInformation> list2 = new ArrayList<>(); //差集数组2
+        List<RoadInformation> list3 = new ArrayList<>(); //交集数组
+        List<RoadInformation> list4 = new ArrayList<>(); //通过i读取的数组
         Sheet sheet0 = wb.getSheetAt(0);
         int count = 0; //返回数据库插入条数记录
         int totalRows = sheet0.getPhysicalNumberOfRows(); //总行数
@@ -119,7 +126,6 @@ public class ExcelRoadServiceImpl implements ExcelRoadService {
             else{
                  cell1 = (int)row.getCell(0).getNumericCellValue();//转为Interger，获取order_number
             }
-
             String cell2 = row.getCell(1).getStringCellValue();//获取桩号
             String cell3 = row.getCell(2).getStringCellValue(); //获取类型
             double cell4 = (double) row.getCell(3).getNumericCellValue(); //转为double x坐标
@@ -136,10 +142,16 @@ public class ExcelRoadServiceImpl implements ExcelRoadService {
                     cell7,cell8,cell9,cell10,cell11,cell12,1);
             //将user添加进批量操作的list里
             list.add(roadInformation);
-            System.out.println("List是"+list);
+            //System.out.println("List是"+list);
         }
         System.out.println("====================");
+        list4 = mapper.getRoads(1); //读取数组
+        list3 = UpUtil.sameRoadList(list,list4); //读取交集
+        if(!list3.isEmpty()){
+            mapper.addRoads(list3);
+        }
         mapper.addRoads(list);
+
 
         return null;
     }

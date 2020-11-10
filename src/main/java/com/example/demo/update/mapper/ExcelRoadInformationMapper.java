@@ -9,11 +9,10 @@ import java.util.List;
 public interface ExcelRoadInformationMapper {
     //批量插入
     public int addRoads(List<RoadInformation> roads);
-    //List<RoadInformation>
     //批量删除
     public int deleteRoads(List<RoadInformation> roads);
     //批量更新
     public int updateRoads(List<RoadInformation> roads);
-
-    //批量
+    //批量查询 ，从数据库中查询返回具体的一个提交记录   //根据唯一标识的belong
+    public List<RoadInformation> getRoads(int i); //i 是唯一标识belong
 }
