@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--namespace对应的是mapper/dao层的地址-->
-<mapper namespace="com.example.demo.author.mapper.AuthorMapper">
+<mapper namespace="com.example.demo.admin.author.mapper.AuthorMapper">
 <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
     <!--查询所有author表记录-->
-    <select id="getAll" resultType="com.example.demo.author.domain.Author">
+    <select id="getAll" resultType="com.example.demo.admin.author.domain.Author">
         select * from author;
     </select>
     <!--根据id找对应的Author对象,传入的是author对象-->
-    <select id="getAuthorById" parameterType="com.example.demo.author.domain.Author" resultType="com.example.demo.author.domain.Author">
+    <select id="getAuthorById" parameterType="com.example.demo.admin.author.domain.Author" resultType="com.example.demo.admin.author.domain.Author">
          select
           id,name,user_id,addr
         from
@@ -24,7 +24,7 @@
         select addr from author where id&lt;=i and id&gt;=j;
     </select>
     <!--根据Author对象的user_id找User表的所有字段-->
-    <resultMap id="AuthorModel" type="com.example.demo.author.domain.Author">
+    <resultMap id="AuthorModel" type="com.example.demo.admin.author.domain.Author">
         <result column="id" property="u_id"></result>
         <result column="name" property="u_name"></result>
         <result column="age" property="age"></result>

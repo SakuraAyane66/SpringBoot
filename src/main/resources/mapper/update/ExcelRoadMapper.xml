@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.update.mapper.ExcelRoadInformationMapper">
+<mapper namespace="com.example.demo.admin.update.mapper.ExcelRoadInformationMapper">
     <!--批量插入-->
     <insert id="addRoads" parameterType="java.util.List">
         insert into road_information(order_number,stake_number,x_coordinate,
@@ -49,7 +49,7 @@
         )
     </delete>
     <!--批量查询，根据belong的i查询-->
-     <select id="getRoads" resultType="com.example.demo.update.domain.RoadInformation">
+     <select id="getRoads" resultType="com.example.demo.admin.update.domain.RoadInformation">
         select * from road_information where belong = #{i};
      </select>
     <!--private int order_number; //序号

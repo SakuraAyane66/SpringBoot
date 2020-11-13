@@ -1,7 +1,7 @@
 package com.example.demo.common.utils;
 
-import com.example.demo.update.domain.RoadInformation;
-import com.example.demo.update.domain.User;
+import com.example.demo.admin.update.domain.RoadInformation;
+import com.example.demo.admin.update.domain.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

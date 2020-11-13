@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace对应的是mapper/dao层的地址-->
+<!--原来是这里没有加上那么spacce地址-->
+<mapper namespace="">
+    <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
+    <!--根据belong查询所有的记录，是不是再写个标段id查询比较好-->
+    <select id="getRoads" resultType="com.kdkj.project.domain.JkyRoad">
+        select * from jky_road where belong=#{belong}
+    </select>
+    <!--批量插入数据-->
+    <insert id="addRoadInformations" parameterType="java.util.List">
+        insert into jky_road(order_number,stake_number,x_coordinate,
+        y_coordinate,type,lat,lon,method,surface,up,down,bottom,belong,
+        create_by,create_time,update_by,update_time,remark,dept_id) values
+        <foreach collection="roads" item="item" index="index" separator=",">
+            (#{item.order_number},#{item.stake_number},#{item.x},#{item.y},#{item.type},
+            #{item.lat},#{item.lon},#{item.method},#{item.surface},#{item.up},
+            #{item.down},#{item.bottom},#{item.belong},#{item.createBy},sysdate(),#{item.updateBy},#{item.updateTime}
+            ,#{item.remark},#{item.deptId})
+        </foreach>
+    </insert>
+    <!--批量更新数据-->
+    <update id="updateRoadInformations" parameterType="java.util.List">
+        <foreach collection="roads" item="item" index="index" separator=";">
+            update users
+            <set>
+                <if test="item.order_number!=null">
+                    order_number=#{item.order_number},
+                </if>
+                <if test="item.stake_number!=null">
+                    stake_number = #{item.stake_number},
+                </if>
+                <if test="item.x!=null">
+                    x_coordinate= #{item.xCoordinate},
+                </if>
+                <if test="item.y!=null">
+                    y_coordinate= #{item.yCoordinate},
+                </if>
+                <if test="item.username!=null">
+                    type= #{item.type},
+                </if>
+                <if test="item.belong!=null">
+                    belong = #{item.belong}
+                </if>
+                <if test="item.method!=null">
+                    method = #{item.method}
+                </if>
+                <if test="item.deptId!=null">
+                    dept_id = #{item.deptId}
+                </if>
+                <if test="item.surface !=null">
+                    surface = #{item.surface}
+                </if>
+                <if test="item.up !=null">
+                    up = #{item.up}
+                </if>
+                <if test="item.down !=null">
+                    down = #{item.down}
+                </if>
+                <if test="item.bottom !=null">
+                    bottom = #{item.bottom}
+                </if>
+            </set>
+            where id = #{item.roadId}
+        </foreach>
+    </update>
+    <delete id="deleteRoadInformation"> </delete>
+</mapper>

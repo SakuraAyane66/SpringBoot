@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
 @ServletComponentScan
-@MapperScan({"com.example.demo.mapper","com.example.demo.author.mapper","com.example.demo.update.mapper"})
+@MapperScan({"com.example.demo.mapper","com.example.demo.admin.author.mapper","com.example.demo.admin.update.mapper"})
 @EnableCaching  //这是缓存的启动注解，开启缓存
 @EnableTransactionManagement   /// 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 public class DemoApplication implements WebMvcConfigurer { //让启动类实现了接口开启全局的token验证

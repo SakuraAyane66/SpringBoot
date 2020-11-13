@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--namespace对应的是mapper/dao层的地址-->
-<mapper namespace="com.example.demo.update.mapper.ExcelUserMapper">
+<mapper namespace="com.example.demo.admin.update.mapper.ExcelUserMapper">
     <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
-    <insert id="addUser" parameterType="com.example.demo.update.domain.User">
+    <insert id="addUser" parameterType="com.example.demo.admin.update.domain.User">
         insert into users values(#{id},#{name},#{age},#{email},#{address},#{username},#{password},#{belong});
     </insert>
     <!--批量插入,collection里面的对应的是mapper里的参数名-->
@@ -28,7 +28,7 @@
         name=values(name),age = values(age),email=values(email),address=values(address),username=values(username),
         password=values(password);
     </insert>
-    <select id="isExist" parameterType="com.example.demo.update.domain.User" resultType="Integer">
+    <select id="isExist" parameterType="com.example.demo.admin.update.domain.User" resultType="Integer">
          select count(*) from users where id=#{id} ;
     </select>
     <!--批量更新语句-->
@@ -59,7 +59,7 @@
         </foreach>
     </update>
     <!--根据belong的id找到上传的excel属于哪一个文件-->
-    <select id="getUsers" resultType="com.example.demo.update.domain.User">
+    <select id="getUsers" resultType="com.example.demo.admin.update.domain.User">
             select * from users where belong = #{belong}
     </select>
     <!--nice，最终写法,可以批量删除了-->

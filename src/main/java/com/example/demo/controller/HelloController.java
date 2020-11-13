@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,23 +69,25 @@ public class HelloController {
 //        user.setAddress("Tokyo");
 //        user.setAge(22);
         model.addAttribute("user",user);
-        return "test2.html";
+        return "test2";
     }
     @RequestMapping("/index.html")
     public String App(){
         return "index";
     }
+
     //不同的url映射到同一个thymeleaf页面呢？试一试
-    @RequestMapping("/test2.html")
-    public String test2(Model model){
+    @RequestMapping("/ssr.html")
+    public String wt(ModelMap model){
+        List<UserModel> users = new ArrayList<>();
         UserModel user1 = userService.get(1);
         UserModel user2 = userService.get(2);
         UserModel user3 = userService.get(3);
-        List<UserModel> list = new ArrayList<>();
-        list.add(user1);
-        list.add(user2);
-        list.add(user3);
-        model.addAttribute("user",list);
-        return "test2";
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+//        model.addAttribute("users",users);
+        model.put("users",users);
+        return "test3";
     }
 }

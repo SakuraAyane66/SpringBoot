@@ -5,23 +5,17 @@
     <title>thymeleaf模版引擎</title>
 </head>
    <body>
-<!--        <p th:text="${user.age}+'  '+${user.address}">2222</p>-->
-<!--        <P th:inline="text">[[${user.id}]]+[[${user.name}]]+[[${user.age}]]+[[${user.email}]]+[[${user.address}]]-->
-<!--            +[[${user.username}]]+-->
-<!--            [[${user.password}]]-->
-<!--        </P>-->
-<!--        &lt;!&ndash;上述代码能成功显示出数据库中数据，但这肯定不是前后端分离把...前端拿到的是user的模版的数据，虽然也是从后端传递的..&ndash;&gt;-->
-<!--        <p th:object="${user}">[[*{name}]],[[*{address}]],[[*{password}]]</p>-->
-<!--        <p>[[#{user.username}]]</p>-->
-<!--        &lt;!&ndash;@链接&ndash;&gt;-->
-<!--        <a th:href="@{index.html}">国际化</a>-->
+        <p th:text="${user.age}+'  '+${user.address}">2222</p>
+        <P th:inline="text">[[${user.id}]]+[[${user.name}]]+[[${user.age}]]+[[${user.email}]]+[[${user.address}]]
+            +[[${user.username}]]+
+            [[${user.password}]]
+        </P>
+        <!--上述代码能成功显示出数据库中数据，但这肯定不是前后端分离把...前端拿到的是user的模版的数据，虽然也是从后端传递的..-->
+        <p th:object="${user}">[[*{name}]],[[*{address}]],[[*{password}]]</p>
+        <p>[[#{user.username}]]</p>
+        <!--@链接-->
+        <a th:href="@{index.html}">国际化</a>
    <h1>th:each测试</h1>
-   <table>
-       <tr th:each="user:${user}">
-         <td th:text="${user.id}"></td>
-         <td th:text="${user.address}"></td>
-         <td th:text="${user.name}"></td>
-       </tr>
-   </table>
+
    </body>
 </html>
