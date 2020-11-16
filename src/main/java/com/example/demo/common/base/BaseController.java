@@ -1,5 +1,9 @@
 package com.example.demo.common.base;
 
+import com.github.pagehelper.PageInfo;
+import org.apache.poi.ss.formula.functions.T;
+import org.aspectj.weaver.loadtime.Aj;
+
 /**
  * @author CTL
  * <p>控制器的基类，有一些通用属性和方法 </p>
@@ -15,6 +19,10 @@ public class BaseController{
     }
     public AjaxResult success(String msg){
         return AjaxResult.success(msg);
+    }
+    //与pageHelper联合使用，返回的ajax写到pageInfo信息
+    public AjaxResult success(String msg, PageInfo<T> pageInfo){
+        return AjaxResult.success(msg, pageInfo);
     }
 
     //返回错误消息 ，重载方法

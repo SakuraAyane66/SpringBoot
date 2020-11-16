@@ -7,6 +7,7 @@ import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.aspectj.weaver.loadtime.Aj;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class UserController extends BaseController {
     //获取所有的数据
     @RequestMapping("/getAll")
     public List<UserModel> getAll(){
-        PageHelper.startPage(0,15);
+        PageHelper.startPage(1,3);
         System.out.println("--------------到这里来了！");
         List<UserModel> users = userService.getAll();
         System.out.println("--------------到这里来了2！！");
@@ -66,6 +67,19 @@ public class UserController extends BaseController {
         System.out.println("每页显示数量：" + page.getPageSize());
         System.out.println("总页：" + page.getPages());
         return users;
+    }
+    //获取所有的数据
+    @RequestMapping("/getAllPlus")
+    public AjaxResult getAllTest(){
+        PageHelper.startPage(1,3);
+        List<UserModel> users = userService.getAll();
+        PageInfo<UserModel> page = new PageInfo<UserModel>(users);
+        System.out.println("总数量：" + page.getTotal());
+        System.out.println("当前页查询记录：" + page.getList().size());
+        System.out.println("当前页码：" + page.getPageNum());
+        System.out.println("每页显示数量：" + page.getPageSize());
+        System.out.println("总页：" + page.getPages());
+        return success("成功了！！",page);
     }
 
     //获取name
