@@ -20,7 +20,7 @@
     </select>
 <!--    获取所有的信息-->
     <select id="getAll" resultType="com.example.demo.model.UserModel">
-        select * from user;
+        select * from user
     </select>
 <!--    尝试在这里新增一个user,传入的参数是User的实体类对象,values要和数据库表的顺序对上-->
     <select id="addUser" parameterType="com.example.demo.model.UserModel">

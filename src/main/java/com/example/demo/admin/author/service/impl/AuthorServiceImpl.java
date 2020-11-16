@@ -3,6 +3,7 @@ package com.example.demo.admin.author.service.impl;
 import com.example.demo.admin.author.domain.Author;
 import com.example.demo.admin.author.service.AuthorService;
 import com.example.demo.admin.author.mapper.AuthorMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ public class AuthorServiceImpl implements AuthorService {
     //获取所有的author信息
     @Override
     public List<Author> getAll(){
+        PageHelper.startPage(1,5);
         return mapper.getAll();
     }
 

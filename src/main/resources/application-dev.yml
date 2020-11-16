@@ -96,3 +96,9 @@ logging:
   config: src/main/resources/logback.xml
   level:
     com.example.demo.mapper: trace
+#PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql

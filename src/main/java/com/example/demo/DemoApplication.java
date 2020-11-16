@@ -25,6 +25,7 @@ public class DemoApplication implements WebMvcConfigurer { //让启动类实现�
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
+        System.out.println("恭喜！Alice已经启动成功了，sakura！");
     }
 
     @Override
@@ -35,7 +36,7 @@ public class DemoApplication implements WebMvcConfigurer { //让启动类实现�
 
         //使用日志
         logger.info("SpringBoot加载完毕");
-        System.out.println("恭喜！Alice已经启动成功了，sakura！");
+
 
         //Object s = getClass();
 //        Object d= DemoApplication.class;
