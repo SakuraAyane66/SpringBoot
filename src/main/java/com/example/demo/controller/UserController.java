@@ -71,7 +71,7 @@ public class UserController extends BaseController {
     //获取所有的数据
     @RequestMapping("/getAllPlus")
     public AjaxResult getAllTest(){
-        PageHelper.startPage(1,3);
+        PageHelper.startPage(3,3);
         List<UserModel> users = userService.getAll();
         PageInfo<UserModel> page = new PageInfo<UserModel>(users);
         System.out.println("总数量：" + page.getTotal());

@@ -1,5 +1,6 @@
 package com.example.demo.common.base;
 
+import com.example.demo.model.UserModel;
 import com.github.pagehelper.PageInfo;
 import org.apache.poi.ss.formula.functions.T;
 import org.aspectj.weaver.loadtime.Aj;
@@ -21,7 +22,7 @@ public class BaseController{
         return AjaxResult.success(msg);
     }
     //与pageHelper联合使用，返回的ajax写到pageInfo信息
-    public AjaxResult success(String msg, PageInfo<T> pageInfo){
+    public AjaxResult success(String msg, PageInfo pageInfo){
         return AjaxResult.success(msg, pageInfo);
     }
 

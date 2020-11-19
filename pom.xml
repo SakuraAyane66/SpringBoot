@@ -112,7 +112,12 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper.boot.version}</version>
         </dependency>
-
+        <!--导入串口编程相关的包-->
+        <dependency>
+            <groupId>org.bidib.jbidib.org.qbang.rxtx</groupId>
+            <artifactId>rxtxcomm</artifactId>
+            <version>2.2</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.github.pagehelper</groupId>-->
 <!--            <artifactId>pagehelper</artifactId>-->

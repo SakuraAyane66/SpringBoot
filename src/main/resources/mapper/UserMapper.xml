@@ -54,7 +54,9 @@
     <!--resultmap，type为主体类型-->
     <resultMap id="UserAndAuthor" type="com.example.demo.model.UserModel">
         <!--自定义映射，默认映射列名，在这儿指定了属性，
-        column=外表列名字，property为domain中列名映射的属性-->
+        column=外表列名字，property为domain中列名映射的属性,
+        后面还有一个jdbcType类型，注意其中的枚举变量全部要大写,且没有INT，只有INTEGER,详细枚举变量见百度
+        -->
         <result column="addr" property="authorAddress"/>
     </resultMap>
     <!--在这里需要修改为resultMap加上id,-->

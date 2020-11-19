@@ -54,7 +54,7 @@ public class ExcelController extends BaseController {
     @RequestMapping("/getRoadInfor")
     public AjaxResult getRoadInfor(@RequestParam("id") int id){
         try{
-            PageHelper.startPage(30,20);
+            PageHelper.startPage(1,20);
             List<RoadInformation> list = excelRoadService.getRoads(id);
             PageInfo<RoadInformation> page = new PageInfo<RoadInformation>(list);
             System.out.println("总数量：" + page.getTotal());
@@ -62,7 +62,7 @@ public class ExcelController extends BaseController {
             System.out.println("当前页码：" + page.getPageNum());
             System.out.println("每页显示数量：" + page.getPageSize());
             System.out.println("总页：" + page.getPages());
-            return success("成功了！",list);
+            return success("成功了！",page);
         }catch (Exception e){
             logger.info("文件信息获取出错了",e);
             return error("road信息获取出错");

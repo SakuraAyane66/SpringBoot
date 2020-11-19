@@ -1,5 +1,6 @@
 package com.example.demo.common.base;
 
+import com.example.demo.model.UserModel;
 import com.github.pagehelper.PageInfo;
 import jdk.nashorn.api.scripting.AbstractJSObject;
 import org.apache.poi.ss.formula.functions.T;
@@ -56,7 +57,7 @@ public class AjaxResult extends HashMap<String,Object> {
     }
     //返回正确信息，但是这里是和pageInfo联合使用。。。。
     //使用失败了，在c层返回的是上一个success返回的object对象了，虽然能返回，但是...有点问题啊....
-    public static AjaxResult success(String msg, PageInfo<T> page){
+    public static AjaxResult success(String msg, PageInfo page){
         AjaxResult json = new AjaxResult();
         json.put("code",200);
         json.put("msg",msg);
