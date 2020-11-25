@@ -22,7 +22,6 @@ public class AuthorServiceImpl implements AuthorService {
     //获取所有的author信息
     @Override
     public List<Author> getAll(){
-        PageHelper.startPage(1,5);
         return mapper.getAll();
     }
 

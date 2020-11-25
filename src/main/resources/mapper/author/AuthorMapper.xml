@@ -8,7 +8,7 @@
 <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
     <!--查询所有author表记录-->
     <select id="getAll" resultType="com.example.demo.admin.author.domain.Author">
-        select * from author;
+        select * from author
     </select>
     <!--根据id找对应的Author对象,传入的是author对象-->
     <select id="getAuthorById" parameterType="com.example.demo.admin.author.domain.Author" resultType="com.example.demo.admin.author.domain.Author">
@@ -21,7 +21,8 @@
     </select>
     <!--根据id范围查询所有的地址,按照id顺序排序,因为大于小于要转义-->
     <select id="getAddsByIds" resultType="java.lang.String">
-        select addr from author where id&lt;=i and id&gt;=j;
+   <!--  select addr from author where id&lt;= #{i} and id&gt;= #{j};-->
+     select addr from author where id between #{i} and #{j}; <!--between写法-->
     </select>
     <!--根据Author对象的user_id找User表的所有字段-->
     <resultMap id="AuthorModel" type="com.example.demo.admin.author.domain.Author">

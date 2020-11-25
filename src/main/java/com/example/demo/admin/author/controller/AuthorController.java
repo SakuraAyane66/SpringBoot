@@ -2,6 +2,7 @@ package com.example.demo.admin.author.controller;
 
 import com.example.demo.admin.author.domain.Author;
 import com.example.demo.admin.author.service.AuthorService;
+import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +22,27 @@ public class AuthorController {
     //日志
     private static final Logger logger = LoggerFactory.getLogger(AuthorController.class);
     @Autowired
-    //  @Resource(name = "Author")  //注入实体service的名字，可以根据这个切换数据源，所以有设计impl和接口的必要
     private AuthorService authorService;
+    //  @Resource(name = "Author")  //注入实体service的名字，可以根据这个切换数据源，所以有设计impl和接口的必要
 
     @RequestMapping("/getAddsByIds")
     public List<String> getAddsByIds(@RequestParam("i") int i,@RequestParam("j") int j) {
         try{
+            System.out.println("i为"+i+"j为"+j);
             List<String> adds = authorService.getAddsByIds(i,j);
+            System.out.println("adds是否能查询"+adds);
             return adds;
         }catch (Exception e){
             System.out.println("失败了，日志也输出debug");
+            System.out.println(e);
             logger.info("debug");
             return null;
         }
     }
     @RequestMapping("/getAuthorAll")
     public List<Author> getAll(){
+        //pageHelper放在c层中
+        PageHelper.startPage(1,5);
         List<Author> authors = authorService.getAll();
         return authors;
     }
