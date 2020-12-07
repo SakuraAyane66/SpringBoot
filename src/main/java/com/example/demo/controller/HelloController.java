@@ -51,7 +51,6 @@ public class HelloController {
     @RequestMapping("/test1")
     public String test1(){
         System.out.println(dataSource);
-
         return "test1";
     }
     //测试pathVaribale注解，解析路径中的{}

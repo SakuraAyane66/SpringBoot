@@ -39,7 +39,7 @@ public class AuthorController {
             return null;
         }
     }
-    @RequestMapping("/getAuthorAll")
+    @RequestMapping("/d")
     public List<Author> getAll(){
         //pageHelper放在c层中
         PageHelper.startPage(1,5);
