@@ -4,6 +4,7 @@ import com.example.demo.DemoApplication;
 import com.example.demo.common.utils.JwtUtil;
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
+import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,29 @@ public class HelloController {
     private DataSource dataSource;
     @Autowired
     private UserService userService;
+
+    //主页sakura
+    @RequestMapping("/")
+    public String nice(){
+        return "index";
+    }
+
+    //python 数据展示页面
+    @RequestMapping("/Python/test0")
+    public String pythontest0(){
+        return "PythonData";
+    }
+
+    //解析txt文本中的data并返回，
+    @RequestMapping(value = "/Python/getTest0Data",method = RequestMethod.POST)
+    @ResponseBody()
+    public String getData(@RequestParam("filename") String filename){
+        String pro = "D:\\";
+        String filepath = pro+filename;
+        System.out.println("filepath为"+filepath);
+        return null;
+    }
+
     @RequestMapping("/hello")
     public String hello(HttpServletRequest request,@RequestParam("token") String token){
         //从请求头中获取jwt
@@ -70,9 +94,9 @@ public class HelloController {
         model.addAttribute("user",user);
         return "test2";
     }
-    @RequestMapping("/index.html")
+    @RequestMapping("/excel.html")
     public String App(){
-        return "index";
+        return "PostTest";
     }
 
     //不同的url映射到同一个thymeleaf页面呢？试一试

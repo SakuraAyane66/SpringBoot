@@ -120,10 +120,7 @@ public class UserController extends BaseController {
         UserModel user = new UserModel(id,name,age,email,address,username,password);  //根据传递的数据新建一个userMode对象
         userService.updateUser(user); //将对象注入到update方法中
     }
-    @RequestMapping("/")
-    public String nice(){
-        return "hello sakura";
-    }
+
     //resultMap测试类
     @RequestMapping("/getUsersAndAuthor")
     public List<UserModel> getUsersAndAuthor(){
