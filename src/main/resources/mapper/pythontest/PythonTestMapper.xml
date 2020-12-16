@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace对应的是mapper/dao层的地址-->
+<mapper namespace="com.example.demo.admin.pythontest.mapper.PythonTestMapper">
+    <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
+    <select id="getAll"  resultType="com.example.demo.admin.pythontest.domain.PythonGuanxi"> 
+        select * from python_guanxi;
+    </select>
+    <select id="getValueById" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select value from python_guanxi where id = #{id};
+    </select>
+<!--    <insert id="" parameterType=""> </insert>-->
+<!--    <update id=""> </update>-->
+<!--    <delete id=""> </delete>-->
+</mapper>

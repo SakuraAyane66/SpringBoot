@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1> hello wtf ？？？？？.......</h1>
+=====================
+<li th:text="${CTL}"></li>
+<!--<iframe src="http://localhost:80/login" width="80%" height="2000px">-->
+
+<!--</iframe>-->
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+$(function (){
+    $.ajax({
+        type:'post',
+        url:"http://localhost:80/login",
+        data:{username:"admin",password:"123456",rememberMe:false},
+        success:function(result){
+            $("#div1").html(result);
+        },
+        error:function (msg){
+            console.log(emsg);
+        }
+        });
+})
+</script>
+</html>

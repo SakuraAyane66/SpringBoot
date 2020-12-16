@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts 展示python处理数据</title>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+</head>
+<body>
+<h1> hello Alice</h1>
+<br />
+<div id="main" style="width: 600px;height:400px;">
+    <br style="color: yellow"/>
+<div id="test" style="width: 800px;height: 800px;"></div>
+
+</div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var testChart = echarts.init(document.getElementById('test'))
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data:['数据展示']
+        },
+        xAxis: {
+            data: ["黄晓明","李强","吴传海"," 李伟","  张争奇","王选仓"]
+        },
+        yAxis: {},
+        series: [{
+            name: '数量',
+            type: 'bar',
+            data: [65, 47, 46, 45, 44, 43]
+        }]
+    };
+    var testOption = {
+        title: {
+            text: '关系图测试展示'
+        },
+        tooltip: {},
+        legend: {
+            data:['数据展示']
+        },
+        series: [{
+            name: '数量',
+            type:'bar'
+        }]
+    }
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    testChart.setOption(testOption);
+</script>
+</body>
+</html>
