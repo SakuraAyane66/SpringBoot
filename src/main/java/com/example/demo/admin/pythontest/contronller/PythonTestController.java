@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -27,16 +28,17 @@ public class PythonTestController extends BaseController {
     @RequestMapping("/python/getGuanxi")
     public AjaxResult test(){
         //作为前端需要的返回结果
-        HashMap<String, String[]> result = new HashMap<>();
+        LinkedHashMap<String, String[]> result = new  LinkedHashMap<>(); //LinkedHashMap是有序的
+//        HashMap<String, String[]> result = new  HashMap<>();   //hashMap是无序的
         List<PythonGuanxi> list = pythonTestService.getAll();
         list.forEach(str->{
             String arr[] = null;
             System.out.println(str.getKeyname());
             String temp = str.getValue(); //取的数据库value字符串的值
             temp = temp.substring(2,temp.length()-2);  //去掉中括号
-            arr = temp.split("', '");
+            arr = temp.split("', '"); //字符串拆分为字符数组
 //            System.out.println(arr1);
-           //String arr1[]={"马涛", "王真", "赵永利", "王宏畅", "廖公云", "薛国强", "李志栋", "岳学军", "薛彦卿"};
+//            String arr1[]={"马涛", "王真", "赵永利", "王宏畅", "廖公云", "薛国强", "李志栋", "岳学军", "薛彦卿"};
 //            System.out.println("每一个str是什么");
 //            System.out.println(str);
 //            System.out.println(str.getId());
