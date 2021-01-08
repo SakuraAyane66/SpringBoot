@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.admin.update.domain.RoadInformation;
+import com.example.demo.admin.update.domain.User;
 import com.example.demo.common.base.AjaxResult;
 import com.example.demo.common.base.BaseController;
+import com.example.demo.common.utils.UpUtil;
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
 import com.github.pagehelper.PageHelper;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,18 +93,12 @@ public class UserController extends BaseController {
     }
     //Post方法，ajax请求，中间部分是获取接受的数据信息
     @PostMapping("/addUser")
-    public void addUser(@RequestParam("id") int id,
-                        @RequestParam("name") String name,
-                        @RequestParam("age") int age,
-                        @RequestParam("email") String email,
-                        @RequestParam("address") String address,
-                        @RequestParam("username") String username,
-                        @RequestParam("password") String password
-                        ){
-        UserModel userModel = new UserModel(id,name,age,email,address,username,password);//初始化一个实体类对象
+    public String addUser(UserModel userModel){
+        //UserModel userModel = new UserModel(id,name,age,email,address,username,password);//初始化一个实体类对象
         System.out.println("user看看"+userModel);
         //增加user
         userService.addUser(userModel);
+        return "成功了";
     }
     //根据id删除user,可以执行
     @RequestMapping("/delete")
@@ -117,6 +114,7 @@ public class UserController extends BaseController {
                        @RequestParam("address") String address,
                        @RequestParam("username") String username,
                        @RequestParam("password") String password){
+       //后期写法，直接在参数获取哪儿得到user 模型，就能直接使用了,看上面UserModel模型
         UserModel user = new UserModel(id,name,age,email,address,username,password);  //根据传递的数据新建一个userMode对象
         userService.updateUser(user); //将对象注入到update方法中
     }
@@ -142,5 +140,31 @@ public class UserController extends BaseController {
         AjaxResult json = success("成功!了！",userModel);
         System.out.println("json会是什么呢？"+json);
         return json;
+    }
+
+
+
+    @RequestMapping("/getUserUpUtilTest")
+    public List<User> getTest(){
+       User u1 = new User();
+       u1.setId(1);
+       User u2 = new User();
+       u2.setId(2);
+       User u3 = new User();
+       u3.setId(3);
+       User u4 = new User();
+       u4.setId(4);
+       User u6 = new User();
+       u6.setId(6);
+       List<User> old = new ArrayList<>();//新增了u1,u2
+       old.add(u1);
+       old.add(u2);
+       List<User> newarr = new ArrayList<>();
+       newarr.add(u2);
+       newarr.add(u3);
+
+       List<User> result = UpUtil.diffList(newarr,old);
+        System.out.println("result是"+result);
+       return null;
     }
 }

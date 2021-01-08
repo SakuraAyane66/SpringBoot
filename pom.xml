@@ -157,6 +157,18 @@
             <artifactId>thymeleaf-extras-shiro</artifactId>
             <version>${thymeleaf.extras.shiro.version}</version>
         </dependency>
+
+        <!--springboot反向服务器代理依赖插件-->
+        <dependency>
+        <groupId>org.mitre.dsmiley.httpproxy</groupId>
+        <artifactId>smiley-http-proxy-servlet</artifactId>
+        <version>1.7</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>18.0</version>
+    </dependency>
     </dependencies>
 
     <build>

@@ -24,7 +24,7 @@
     </select>
 <!--    尝试在这里新增一个user,传入的参数是User的实体类对象,values要和数据库表的顺序对上-->
     <select id="addUser" parameterType="com.example.demo.model.UserModel">
-        insert into user values(#{id},#{name},#{age},#{email},#{address},#{username},#{password});
+        insert into user values(#{id},#{name},#{age},#{email},#{address},#{username},#{password})
     </select>
 <!-- 更新User-->
     <select id="updateUser" parameterType="com.example.demo.model.UserModel">

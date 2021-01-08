@@ -102,3 +102,8 @@ pagehelper:
   reasonable: false
   supportMethodsArguments: true
   params: count=countSql
+
+#反向代理的@value注解的默认值
+proxy.servlet_url: /api/test
+# 要代理的地址
+proxt.target_url: http://139.9.158.27:81/yhjc-ytw/rest/getDecisionSumAmount
