@@ -38,10 +38,11 @@ public class JkyYoushibiServiceImpl implements jkyYoushibiService {
         for(JkyYoushibi youshibi:jkyYoushibis){
             Field[] fields = youshibi.getClass().getDeclaredFields();//反射获取所有的字段
             Double weight = 0.0; //总重量，骨料加石粉
+            Double shifen=0.0; //石粉总重量，石粉一般不是累加，单独计算
             Double liqing = 0.0; //沥青总重量
             //新建double数组list
             List<Double> nums=new ArrayList<Double>();
-            List<Double> nums1 = new ArrayList<Double>();
+
             //循环字段获取数据
             try{
                 for(Field ff:fields){
@@ -50,7 +51,7 @@ public class JkyYoushibiServiceImpl implements jkyYoushibiService {
                             nums.add((Double)ff.get(youshibi)); //骨料添加进nums中
                     }
                     if(ff.getName().contains("shifen")&&ff.get(youshibi)!=null){
-                            nums1.add((Double) ff.get(youshibi)); //石粉需要单独分开计算，不能笼统取最大
+                            shifen += (Double) ff.get(youshibi); //石粉需要单独分开计算，不能笼统取最大，石粉一般不是累加的
                     }
                     if(ff.getName().contains("liqing")&&ff.get(youshibi)!=null){
                             liqing+= (Double) ff.get(youshibi);
@@ -62,16 +63,14 @@ public class JkyYoushibiServiceImpl implements jkyYoushibiService {
             }
             //找出最大值
             Double Max = Collections.max(nums);  //骨料最大
-            Double Max1 = Collections.max(nums1); //石料最大
+            weight =Max+shifen;
             System.out.println("在第"+flag+"次循环中的Max为"+Max);
-            weight=Max+Max1;
-            System.out.println("在第"+flag+"次循环中的骨料重量为"+weight);
+            System.out.println("在第"+flag+"次循环中的骨料和石粉总重量为"+weight);
             DecimalFormat df = new DecimalFormat("0.00");//十进制格式化，四舍五入留小数点后2位
-            ratioNums[flag] = df.format((weight/liqing));//得到油石比,这里没有*100
-            System.out.println("在第"+flag+"次循环中的值为"+ratioNums[flag]);
+            ratioNums[flag] = df.format((liqing/weight)*100);//得到油石比已经是显示百分比的值了，乘了100
+            System.out.println("在第"+flag+"次循环中的油石比为"+ratioNums[flag]);
             flag++;
          }
-
         return ratioNums;
     }
 }
