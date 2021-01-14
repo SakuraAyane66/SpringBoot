@@ -14,7 +14,10 @@
         <p th:object="${user}">[[*{name}]],[[*{address}]],[[*{password}]]</p>
         <p>[[#{user.username}]]</p>
         <!--@链接-->
-        <a th:href="@{index.html}">国际化</a>
+        超链接href访问的是controller层的接口，而不是本地的网页url，要从c层返回视图...
+        <a th:href="@{/}">国际化</a>
+        <br />
+        <a th:href="@{/demo/test1.html}">跳转到test1</a>
    <h1>th:each测试</h1>
 
    </body>
