@@ -6,14 +6,18 @@
 <!--namespace对应的是mapper/dao层的地址-->
 <mapper namespace="com.example.demo.alice.user.mapper.AliceUserMapper">
     <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
-<!--    <select id="createUser" parameterType="com.example.demo.alice.user.domain.AliceUser">-->
-
-<!--    </select>-->
+    <select id="isExist" parameterType="com.example.demo.alice.user.domain.AliceUser" resultType="java.lang.Integer">
+            select count(*) from userinfo where username = #{username}
+    </select>
 
     <!-- 创建一个新用户   -->
     <insert id="createUser" parameterType="com.example.demo.alice.user.domain.AliceUser">
         insert into userinfo(username,password,clear_password) value(#{username},#{password},#{clearPassword})
     </insert>
+
+    <select id="login" parameterType="com.example.demo.alice.user.domain.AliceUser" resultType="com.example.demo.alice.user.domain.AliceUser">
+        select * from userinfo where username = #{username} and password = #{password}
+    </select>
 <!--    <update id=""> </update>-->
 <!--    <delete id=""> </delete>-->
 </mapper>

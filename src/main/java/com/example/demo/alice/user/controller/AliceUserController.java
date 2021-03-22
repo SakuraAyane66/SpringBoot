@@ -26,12 +26,27 @@ public class AliceUserController extends BaseController {
     @ResponseBody
     @PostMapping("/createUser")
     public AjaxResult createUser(AliceUser user){
-        System.out.println("是否成功进入到了这里"+user);
-        user.setClearPassword(user.getPassword());
-        user.setPassword(md5(user.getClearPassword())); //对明文密码加密
-        userService.createUser(user);
-        return success("注册成功！");
+        if(user.getUsername()==null){
+            return error("用户名为空,请输入用户名");
+        }
+        if(user.getPassword()==null){
+            return error("密码为空,请输入用户名");
+        }
+        String msg =userService.createUser(user);
+        return success(msg);
     }
 
-
+    @PostMapping("/alice/login")
+    public AjaxResult login(AliceUser user){
+        System.out.println("user"+user);
+        System.out.println("是否为空"+user.getPassword()=="");
+        if(user.getUsername()==null||user.getUsername()==" "){
+            return error("用户名为空,请输入用户名");
+        }
+        if(user.getPassword()==null || user.getPassword()==""){
+            return error("密码为空,请输入用户名");
+        }
+       String msg = userService.login(user);
+        return success(msg);
+    }
 }
