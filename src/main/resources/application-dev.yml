@@ -93,7 +93,7 @@ mybatis:
 #  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #日志配置
 logging:
-  config: src/main/resources/logback.xml
+#  config: src/main/resources/logback.xml
   level:
     com.example.demo.mapper: trace
 #PageHelper分页插件
