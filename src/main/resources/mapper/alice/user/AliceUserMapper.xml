@@ -5,19 +5,139 @@
 
 <!--namespace对应的是mapper/dao层的地址-->
 <mapper namespace="com.example.demo.alice.user.mapper.AliceUserMapper">
+    <!--根据用户的账号或者id查询用户所有信息-->
+    <select id="selectUser" resultType="com.example.demo.alice.user.domain.AliceUser" parameterType="com.example.demo.alice.user.domain.AliceUser">
+        select * from userinfo
+        <where>
+            <if test="id != null and id !=''">
+                and id =#{id}
+            </if>
+            <if test="username != null and username !=''">
+                and username = #{username}
+            </if>
+        </where>
+    </select>
     <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
     <select id="isExist" parameterType="com.example.demo.alice.user.domain.AliceUser" resultType="java.lang.Integer">
             select count(*) from userinfo where username = #{username}
     </select>
+    <!-- 查询数据库中phonenumber是否已经被注册-->
+    <select id="isPhoneNumberExist" resultType="java.lang.Integer">
+            select count(*) from userinfo where phonenumber = #{phonenumber};
+    </select>
 
     <!-- 创建一个新用户   -->
     <insert id="createUser" parameterType="com.example.demo.alice.user.domain.AliceUser">
-        insert into userinfo(username,password,clear_password) value(#{username},#{password},#{clearPassword})
+        insert into userinfo(
+        <if test="username !=null and username !=''">username,</if>
+        <if test="password !=null and password !=''">password,</if>
+        <if test="xingmin !=null and xingmin !=''">xingmin,</if>
+        <if test="age !=null and age != 0">age,</if>
+        <if test="address !=null and address !=''">address,</if>
+        <if test="school !=null and school !=''">school,</if>
+        <if test="email !=null and email !=''">email,</if>
+        <if test="qianming !=null and qianming !=''">qianming,</if>
+        <if test="phonenumber !=null and phonenumber !=''">phonenumber,</if>
+        <if test="icons !=null and icons !=''">icons,</if>
+        <if test="salt !=null and salt !=''">salt,</if>
+        <if test="clearPassword !=null and clearPassword !=''">clear_password,</if>
+        <if test="login_ip !=null and login_ip !=''">login_ip,</if>
+        <if test="login_data !=null and login_data !=''">login_data,</if>
+        <if test="update_time !=null and update_time !=''">update_time,</if>
+        <if test="remark !=null and remark !=''">remark,</if>
+        <if test="ban_time !=null and ban_time !=''">ban_time,</if>
+        <if test="status !=null and status !=''">status,</if>
+        creat_time
+        )
+        values(
+        <if test="username !=null and username !=''">#{username},</if>
+        <if test="password !=null and password !=''">#{password},</if>
+        <if test="xingmin !=null and xingmin !=''">#{xingmin},</if>
+        <if test="age !=null and age != 0">#{age},</if>
+        <if test="address !=null and address !=''">#{address},</if>
+        <if test="school !=null and school !=''">s#{chool},</if>
+        <if test="email !=null and email !=''">#{email},</if>
+        <if test="qianming !=null and qianming !=''">#{qianming},</if>
+        <if test="phonenumber !=null and phonenumber !=''">#{phonenumber},</if>
+        <if test="icons !=null and icons !=''">#{icons},</if>
+        <if test="salt !=null and salt !=''">#{salt},</if>
+        <if test="clearPassword !=null and clearPassword !=''">#{clearPassword},</if>
+        <if test="login_ip !=null and login_ip !=''">#{login_ip},</if>
+        <if test="login_data !=null and login_data !=''">#{login_data},</if>
+        <if test="update_time !=null and update_time !=''">#{update_time},</if>
+        <if test="remark !=null and remark !=''">#{remark},</if>
+        <if test="ban_time !=null and ban_time !=''">#{ban_time},</if>
+        <if test="status !=null and status !=''">#{status},</if>
+        sysdate()
+        )
     </insert>
 
+    <!--根据密码查询该用户的信息-->
     <select id="login" parameterType="com.example.demo.alice.user.domain.AliceUser" resultType="com.example.demo.alice.user.domain.AliceUser">
-        select * from userinfo where username = #{username} and password = #{password}
+        select * from userinfo where username = #{username} and password = #{password} and status = 0
     </select>
+
+    <!--根据用户信息查询对应的盐-->
+    <select id="getSalt" parameterType="com.example.demo.alice.user.domain.AliceUser" resultType="string">
+        select salt from userinfo
+        <where>
+            <if test="id !=null and id !=0">
+                and id = #{id}
+            </if>
+            <if test="username!=null and username!=''">
+                and username=#{username}
+            </if>
+            <if test="phonenumber!=null and phonenumber!=''">
+                and phonenumber =#{phonenumber}
+            </if>
+        </where>
+    </select>
+
+    <!--根据用户信息查询对应的status,查看账号否被禁用-->
+    <select id="getStatus" parameterType="com.example.demo.alice.user.domain.AliceUser" resultType="string">
+        select status from userinfo
+        <where>
+            <if test="id !=null and id !=0">
+                and id = #{id}
+            </if>
+            <if test="username!=null and username!=''">
+                and username=#{username}
+            </if>
+            <if test="phonenumber!=null and phonenumber!=''">
+                and phonenumber =#{phonenumber}
+            </if>
+        </where>
+    </select>
+
+    <!--根据用户信息查询对应的ban_time,此时的status必须要为1（封禁状态）-->
+    <select id="getBanTime" parameterType="com.example.demo.alice.user.domain.AliceUser" resultType="Date">
+        select ban_time from userinfo
+        <where>
+            <if test="id !=null and id !=0">
+                and id = #{id}
+            </if>
+            <if test="username!=null and username!=''">
+                and username=#{username}
+            </if>
+            <if test="phonenumber!=null and phonenumber!=''">
+                and phonenumber =#{phonenumber}
+            </if>
+            and status = 1
+        </where>
+    </select>
+
+    <!--修改status为0的状态-->
+    <update id="changeStatus" parameterType="com.example.demo.alice.user.domain.AliceUser">
+        update userinfo set status = 0
+        <where>
+            <if test="id !=null and id !=0">and id =#{id}</if>
+            <if test="username !=null and username !=''"> and username = #{username}</if>
+        </where>
+    </update>
+
 <!--    <update id=""> </update>-->
 <!--    <delete id=""> </delete>-->
+
+
+
 </mapper>

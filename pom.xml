@@ -120,16 +120,6 @@
             <artifactId>rxtxcomm</artifactId>
             <version>2.2</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.github.pagehelper</groupId>-->
-<!--            <artifactId>pagehelper</artifactId>-->
-<!--            <version>5.1.10</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.pagehelper</groupId>-->
-<!--            <artifactId>pagehelper-spring-boot-autoconfigure</artifactId>-->
-<!--            <version>1.2.5</version>-->
-<!--        </dependency>-->
         <!--Shiro核心框架 -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -164,6 +154,13 @@
         <artifactId>smiley-http-proxy-servlet</artifactId>
         <version>1.7</version>
     </dependency>
+
+        <!--解析客服端相关信息的插件（浏览器信息，操作系统等）-->
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.21</version>
+        </dependency>
     <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>

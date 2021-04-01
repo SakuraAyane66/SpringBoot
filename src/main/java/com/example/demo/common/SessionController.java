@@ -39,6 +39,7 @@ public class SessionController {
     //JWT 登录接口
     //JWT 的单次请求测试接口在HelloController /hello中
     //后续已经开启了全局的过滤器在config中的LoginInterceptor中，并且在启动类实现了接口的继承
+    //session只适合单点登录（其实jwt配合redis和session配合redis不是差不多么）
     @PostMapping("/loginJwt")
     public String loginJwt(@RequestParam("username") String username,@RequestParam("password") String password){
         UserModel user = userService.findUser(username,password); //找到user

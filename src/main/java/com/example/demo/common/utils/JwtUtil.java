@@ -1,10 +1,13 @@
 package com.example.demo.common.utils;
 
+import com.example.demo.DemoApplication;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.Date;
@@ -15,6 +18,8 @@ import java.util.Date;
  * 创建日期：2020-10-20 17:57
  */
 public class JwtUtil {
+    //日志系统
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
     /**
      * 这个秘钥是防止JWT被篡改的关键，随便写什么都好，但决不能泄露
      * PHP Laravel框架是系统自动生成的
@@ -22,6 +27,7 @@ public class JwtUtil {
     private final static String secretKey = "alice";
     /**
      * 过期时间目前设置成2小时吧，这个配置随业务需求而定
+     * 此处是用户两个小时不进行操作要退出登录，如果用户操作了，那么要动态的刷新token
      */
     private final static Duration expiration = Duration.ofHours(2);
     /**
@@ -46,6 +52,7 @@ public class JwtUtil {
      * 解析JWT
      * @param token JWT字符串
      * @return 解析成功返回Claims对象，解析失败返回null
+     * 解析前需要现在redis中查询该token是否失效
      */
     public static Claims parse(String token) {
         // 如果是空字符串直接返回null
@@ -62,8 +69,17 @@ public class JwtUtil {
                     .getBody();
         } catch (JwtException e) {
             // 这里应该用日志输出，为了演示方便就直接打印了
+            logger.info("token解析失败",token);
             System.err.println("解析失败！");
         }
         return claims;
+    }
+
+
+    public static void main(String[] args) {
+       String token =  JwtUtil.generate("sakura");
+        System.out.println(token);
+        Claims cc = JwtUtil.parse(token);
+        System.out.println(cc);
     }
 }
