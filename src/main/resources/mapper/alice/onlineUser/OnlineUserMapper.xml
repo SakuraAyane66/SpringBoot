@@ -12,7 +12,7 @@
         insert into sys_users_online(
         <if test="username!=null and username !=''">login_name,</if>
         <if test="ipaddr!=null and ipaddr!=''">ipaddr,</if>
-        <if test="loginLocation!=null and loginLocation !=''">login_location,</if>
+        <if test="loginLocation!=null and loginLocation !=''">ip_location,</if>
         <if test="browser!=null and browser !=''">browser,</if>
         <if test="os!=null and os !=''">os,</if>
         <if test="status!=null and status !=''">status,</if>
@@ -36,7 +36,7 @@
         insert into sys_logininfor(
         <if test="username!=null and username !=''">username,</if>
         <if test="ipaddr!=null and ipaddr!=''">ipaddr,</if>
-        <if test="loginLocation!=null and loginLocation !=''">login_location,</if>
+        <if test="loginLocation!=null and loginLocation !=''">ip_location,</if>
         <if test="browser!=null and browser !=''">browser,</if>
         <if test="os!=null and os !=''">os,</if>
         <if test="status!=null and status !=''">status,</if>

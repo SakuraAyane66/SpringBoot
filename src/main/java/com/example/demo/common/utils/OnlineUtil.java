@@ -24,6 +24,9 @@ public class OnlineUtil {
         //调用获取ip的控制器
         String ip = IpUtil.getIpAddr(request);
         onlineUser.setIpaddr(ip);//赋值ip
+        //根据ip获取到地理位置
+        String location = IpToAddressUtil.getCityInfo(ip);
+        onlineUser.setLoginLocation(location);//赋值地理位置
         //得到浏览器类型
         String browserName = userAgent.getBrowser().getName();
         onlineUser.setBrowser(browserName); //赋值browser名字
