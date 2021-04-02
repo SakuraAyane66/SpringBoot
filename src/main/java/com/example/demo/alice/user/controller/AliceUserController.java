@@ -26,12 +26,13 @@ import static com.alibaba.druid.util.Utils.md5;
  */
 @RestController
 public class AliceUserController extends BaseController {
+    private final String ctx = "alice"; //以后更改ctx的内容，下面所有的内容都可以一起修改了，方便管理
     @Autowired
     private AliceUserService userService;
     @Autowired
     private OnlineUserService onlineUserService; //引入online/日志 服务
 
-    @PostMapping("alice/test")
+    @PostMapping(ctx+"/test")
     @ResponseBody
     public String getIp(HttpServletRequest request,@RequestBody AliceUser user){
         //此工具类不能分辨是是否是谷歌浏览器设置的是iphone访问
@@ -55,7 +56,7 @@ public class AliceUserController extends BaseController {
 
     //注册新账号
     @ResponseBody
-    @PostMapping("alice/createUser")
+    @PostMapping(ctx+"/createUser")
     public AjaxResult createUser(@RequestBody AliceUser user){
         //此处要加上用手机账号登录()
 //        if(user.getPhonenumber()!=null){
@@ -90,33 +91,36 @@ public class AliceUserController extends BaseController {
     }
 
     //还是把request处理的部分放到service中吧，c中只处理返回，逻辑还是在service中
-    @PostMapping("/alice/login")
+    //*****后续还要考虑单点登录，以及在线用户现在插入进去能插入多条相同名字的记录（同一个用户在线会插入多次），如何动态的更改在线用户表的状态
+    //还有逻辑细节需要完善,以及token如何加入到redis中，还有插入其他表的操作需要用队列，分开完成。
+    @PostMapping(ctx+"/login")
     public AjaxResult login(HttpServletRequest request,@RequestBody AliceUser user){
         //如果是手机登录，先赋值username
         if(user.getPhonenumber()!=null && user.getPhonenumber()!=""){
             user.setUsername(user.getPhonenumber()); //将phonenumber赋值给username（手机号注册的username就是手机号）
         }
+        //此处是防止绕过前端验证设立的，可以方便记录其访问的ip地址
         if(user.getUsername()==null||user.getUsername()==""){
             System.out.println("测试失败1！用户名为空");
             //此时向登录日志中插入失败信息
             onlineUserService.insertLoginInfor(request,user,"0","用户名为空");
-            return error("用户名为空,请输入用户名");
+            return error(200,"用户名为空,请输入用户名",null);
         }
         if(user.getClearPassword()==null || user.getClearPassword()==""){
             System.out.println("测试失败2！密码为空");
             //此时向登录日志中插入失败信息
             onlineUserService.insertLoginInfor(request,user,"0","密码为空");
-            return error("密码为空,请输入用户名");
+            return error(200,"密码为空,请输入密码！",null);
         }
         //登录端，手机注册的和网页注册的都一个接口
         //此处通过验证resultMap的信息判断是否成功登录
-        Map<String,String> resultMap = userService.login(user);
+        Map<String,String> resultMap = userService.login(request,user);
         //如果返回的map中包含了token，登录成功
         if(resultMap.get("token")!=null){
             return success(resultMap.get("msg"),resultMap);
         }else{
             //不包含token
-            return error(resultMap.get("msg"));
+            return error(200,resultMap.get("msg"),null);
         }
     }
 }

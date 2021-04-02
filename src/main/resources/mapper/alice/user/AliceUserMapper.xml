@@ -135,7 +135,9 @@
         </where>
     </update>
 
-<!--    <update id=""> </update>-->
+    <update id="updateLastIpAndTime" parameterType="string">
+     update userinfo set login_ip = #{ip}, login_data = sysdate()
+    </update>
 <!--    <delete id=""> </delete>-->
 
 

@@ -7,9 +7,6 @@
 <!--修改在线表的相关内容-->
 <mapper namespace="com.example.demo.alice.user.mapper.OnlineUserMapper">
     <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
-<!--    <select id="" parameterType="" resultType="">-->
-<!--       -->
-<!--    </select>-->
     <!--向在线用户表中插入一个用户-->
     <insert id="insertOnlineUser" parameterType="com.example.demo.alice.user.domain.OnlineUser">
         insert into sys_users_online(
@@ -19,8 +16,8 @@
         <if test="browser!=null and browser !=''">browser,</if>
         <if test="os!=null and os !=''">os,</if>
         <if test="status!=null and status !=''">status,</if>
-        login_time,
-        <if test="lastAccessTime!=null and lastAccessTime !=''">last_access_time</if>
+        last_access_time,
+        login_time
         )
         values (
         <if test="username!=null and username !=''">#{username},</if>
@@ -30,12 +27,11 @@
         <if test="os!=null and os !=''">#{os},</if>
         <if test="status!=null and status !=''">#{status},</if>
         sysdate(),
-        <if test="lastAccessTime!=null and lastAccessTime !=''">#{lastAccessTime},</if>
+        sysdate()
         )
     </insert>
 
     <!--向登录日志表插入一条信息-->
-    <!--向在线用户表中插入一个用户-->
     <insert id="insertLoginInfor" parameterType="com.example.demo.alice.user.domain.OnlineUser">
         insert into sys_logininfor(
         <if test="username!=null and username !=''">username,</if>

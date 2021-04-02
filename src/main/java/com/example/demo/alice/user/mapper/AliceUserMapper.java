@@ -36,6 +36,8 @@ public interface AliceUserMapper {
     //修改status为0正常使用状态
     void changeStatus(AliceUser user);
 
+    //修改用户表中最后登录的ip和时间
+    int updateLastIpAndTime(String ip);
 
 
     /**

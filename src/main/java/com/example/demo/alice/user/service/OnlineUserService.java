@@ -1,6 +1,7 @@
 package com.example.demo.alice.user.service;
 
 import com.example.demo.alice.user.domain.AliceUser;
+import com.example.demo.alice.user.domain.OnlineUser;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface OnlineUserService {
 
     //向在线用户表插入一条数据
-    String insertOnlineUser(HttpServletRequest request, AliceUser user);
+    int insertOnlineUser(HttpServletRequest request, OnlineUser onlineUser);
 
     //向用户登录日志表插入一条信息
     String insertLoginInfor(HttpServletRequest request, AliceUser user,String status,String msg);
