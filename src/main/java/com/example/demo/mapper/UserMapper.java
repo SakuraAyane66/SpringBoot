@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 //mapper/DAO层实现与数据库的接口，在mapper.xml文件中实现接口的方法，查询数据库相关信息,在service层被调用
+
 @Mapper
 public interface UserMapper {
     //根据id获取信息

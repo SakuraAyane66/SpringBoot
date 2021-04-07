@@ -1,15 +1,21 @@
 package com.example.demo.service;
 
+import com.example.demo.common.utils.RedisUtil;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.UserModel;
 import com.example.demo.common.utils.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,10 +27,17 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class UserService {
-    @Autowired
+    @Resource
     private UserMapper userMapper;
+    @Resource
+    private RedisUtil redisUtil; //引入redis工具类，时间过期单位是秒（s）
     @Autowired //适用redis提供的接口
     RedisTemplate redisTemplate;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;  //使用序列化之后的redis，但是K V值只能是String类型
+
+
+
     //返回根据id查询结果的对象
     public UserModel get(int id){//尝试在这里从上下文中username的获取
 //        String currentUsername = UserContext.getCurrentUserName();
@@ -37,7 +50,23 @@ public class UserService {
     }
     //尝试这么写，看返回是不是String
     public String getName(int id){
-        ValueOperations ops = redisTemplate.opsForValue(); //初始化使用
+        ValueOperations ops = redisTemplate.opsForValue(); //初始化使用,默认序列化方式（带16进制）
+
+        redisTemplate.setKeySerializer(new StringRedisSerializer());//设置redis前面key的序列化格式
+//        redisTemplate.setValueSerializer(new StringRedisSerializer());//设置redis前面value的序列化格式
+
+        HashMap<String,String> ha = new HashMap<>();
+        ha.put("sakura","ayane");
+        ha.put("CTL","skydragon");
+        ops.set("119",ha);
+//        String x=ops.get("119");
+        System.out.println(ops.get("119"));
+//        ValueOperations t1 = stringRedisTemplate.opsForValue(); //初始化StringRedis使用
+//        t1.set("118",ha,10,TimeUnit.MINUTES);
+//        Object result1 = ops.get("119");
+//        System.out.println("从redis中找到的hashmap是什么"+result1);
+//
+//        ops.set("119",ha,10,TimeUnit.MINUTES);
         String name;  //在getName中先声明要获取的信息
         Object id_name = ops.get(id+"_name");  //尝试从redis中取缓存,此时类型是Object
         System.out.println("id_name为"+id_name);//打印
@@ -48,7 +77,7 @@ public class UserService {
         }else{
             name = userMapper.getName(id); //从数据库获取
             System.out.println("数据库中找到的name"+name);
-            ops.set(id+"_name",name,10, TimeUnit.SECONDS); //写入缓存中,时间，时间单位
+            ops.set(id+"_name",name,10, TimeUnit.MINUTES); //写入缓存中,时间，时间单位
         }
         return name;
     }
@@ -86,5 +115,20 @@ public class UserService {
     public List<UserModel> getUsersAndAuthor(){
         List<UserModel> userModel = userMapper.getUsersAndAuthor();
         return userModel;
+    }
+
+    public boolean setRedisTest(){
+        UserModel user = new UserModel();//新建user实体类
+        user.setAge(27);
+        user.setName("sakura");
+        user.setAddress("Tokyo");
+        user.setUsername("Ayane");
+        user.setId(17);
+        redisUtil.set("sakura","ayane");
+        return redisUtil.set("ctl",user,60*60);
+    }
+    public UserModel getRedisTest(String name){
+        UserModel user = (UserModel)redisUtil.get(name);
+        return user;
     }
 }

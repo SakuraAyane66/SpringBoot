@@ -141,9 +141,6 @@ public class UserController extends BaseController {
         System.out.println("json会是什么呢？"+json);
         return json;
     }
-
-
-
     @RequestMapping("/getUserUpUtilTest")
     public List<User> getTest(){
        User u1 = new User();
@@ -166,5 +163,19 @@ public class UserController extends BaseController {
        List<User> result = UpUtil.diffList(newarr,old);
         System.out.println("result是"+result);
        return null;
+    }
+    @RequestMapping("/redistest")
+    public Object setRedisTest(){
+       boolean f = userService.setRedisTest();
+        System.out.println(f);
+       return null;
+    }
+    @RequestMapping("/getRedis")
+    public Object getRedisTest(@RequestParam("name") String name){
+        System.out.println("获取到的name是"+name);
+        System.out.println("转化前的是"+userService.getRedisTest(name));
+        UserModel user = userService.getRedisTest(name);
+        System.out.println("从redis中取到user是什么"+user);
+       return user;
     }
 }

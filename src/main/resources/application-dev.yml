@@ -64,7 +64,7 @@ spring:
     port: 6379
    #password: null 还没有password
     database: 0  #配置redis的0~15编号
-    timeout: 1000s # 数据库连接超时时间,2.0 中该参数的类型为Duration,这里在配置
+    timeout: 3000ms # 数据库连接超时时间,2.0 中该参数的类型为Duration,这里在配置
     jedis:
       pool:
         # 最大空闲连接数
