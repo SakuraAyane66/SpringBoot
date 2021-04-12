@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace对应的是mapper/dao层的地址-->
+<mapper namespace="com.example.demo.alice.announcement.mapper.AnnouncementMapper">
+    <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
+    <!--获取最新9条记录，按照时间排序-->
+    <select id="getNine" resultType="com.example.demo.alice.announcement.domain.Announcement">
+        select * from alice_announcement order by time desc limit 9
+    </select>
+    <!--获取所有的记录,按照时间排序-->
+    <select id="getAll" resultType="com.example.demo.alice.announcement.domain.Announcement">
+        select * from alice_announcement order by time desc
+    </select>
+    <!--根据id获取信息-->
+    <select id="getAnnouncementById" resultType="com.example.demo.alice.announcement.domain.Announcement">
+        select * from alice_announcement where id = #{id}
+    </select>
+    <!--根据keyword查询-->
+    <select id="getAnnouncemetnByString" resultType="com.example.demo.alice.announcement.domain.Announcement">
+        select * from alice_announcement
+        <where>
+            <if test="keyword !=null and keyword !=''">
+             and topic like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </select>
+    <!--更加id更新内容-->
+<!--    <update id=""> </update>-->
+<!--    &lt;!&ndash;根据id删除内容&ndash;&gt;-->
+<!--    <delete id=""> </delete>-->
+    <!---->
+</mapper>
