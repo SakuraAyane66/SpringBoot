@@ -22,7 +22,8 @@ import org.slf4j.LoggerFactory;
              "com.example.demo.admin.roadInfoTest.mapper",
              "com.example.demo.admin.jkyYoushibi.mapper",
              "com.example.demo.alice.user.mapper",
-             "com.example.demo.alice.announcement.mapper"})
+             "com.example.demo.alice.announcement.mapper",
+             "com.example.demo.alice.goodthings.mapper"})
 @EnableCaching  //这是缓存的启动注解，开启缓存
 @EnableTransactionManagement   /// 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 @EnableScheduling //启动定时器的注解，表示启动定时器任务
