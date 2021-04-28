@@ -22,6 +22,10 @@
     <select id="getAll" resultType="com.example.demo.model.UserModel">
         select * from user
     </select>
+    <!--    获取所有的信息,但是返回只有一个类-->
+    <select id="getTestAll" resultType="com.example.demo.model.UserModel">
+        select * from user limit 1
+    </select>
 <!--    尝试在这里新增一个user,传入的参数是User的实体类对象,values要和数据库表的顺序对上-->
     <select id="addUser" parameterType="com.example.demo.model.UserModel">
         insert into user values(#{id},#{name},#{age},#{email},#{address},#{username},#{password})

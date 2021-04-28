@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.common.utils.RedisUtil;
+import com.example.demo.common.utils.ThreadUtil;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.UserModel;
 import com.example.demo.common.utils.UserContext;
@@ -47,6 +48,11 @@ public class UserService {
     //获取所有数据
     public List<UserModel> getAll(){
         return userMapper.getAll();
+    }
+
+    //
+    public UserModel getTestAll(){
+        return userMapper.getTestAll();
     }
     //尝试这么写，看返回是不是String
     public String getName(int id){
@@ -130,5 +136,41 @@ public class UserService {
     public UserModel getRedisTest(String name){
         UserModel user = (UserModel)redisUtil.get(name);
         return user;
+    }
+
+    //线程相关测试，并发查询，用户处理数据库查询时间太长
+    public void getThreadTest() throws InterruptedException{
+        long startTime=System.currentTimeMillis();   //获取开始时间
+        for(int i=1;i<11;i++){
+            //创建线程
+            ThreadUtil t1=new ThreadUtil();
+            t1.setId(i);
+            t1.setName("我是测试线程！！！"+i);
+            //启动线程
+            t1.start();
+            //************有问题！！///
+            t1.join();  //这一句有大问题，要先全部线程start之后才能join，join是需要放在循环外的，
+        }
+//        ThreadUtil t1 = new ThreadUtil();
+//        t1.setId(1);
+//        t1.setName("我是测试线程！！！");
+//        t1.start();
+        System.out.println("线程调用start结束了");
+        //开启start之后，查看运行的结果
+        ThreadUtil.getList();
+        long endTime=System.currentTimeMillis(); //获取结束时间
+        System.out.println("运行时间是"+(endTime-startTime)+"ms");
+        System.out.println("线程类打印输出结束了");
+    }
+    //线程测试相关，确定循环执行mapper是不是顺序执行
+    public void getTestMapperOrder(){
+        long startTime=System.currentTimeMillis();   //获取开始时间
+        //循环1~10
+        for(int i=0;i<11;i++){
+            UserModel userModel = userMapper.get(i); //循环获取到userModl
+            System.out.println("获取了上一个的usermodel之后才会执行下一个的"+userModel);
+        }
+        long endTime=System.currentTimeMillis(); //获取结束时间
+        System.out.println("运行时间是"+(endTime-startTime)+"ms");
     }
 }

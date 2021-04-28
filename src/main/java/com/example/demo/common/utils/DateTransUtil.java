@@ -77,6 +77,13 @@ public class DateTransUtil {
         }
         return false;
     }
+
+    //根据传入的String时间，和String的格式时长x，返回前x秒的时间，不涉及跨天
+    public static String getPreTime(String time,String x){
+
+
+        return "";
+    }
     public static void main(String[] args) {
         DateTransUtil.getDateTime(System.currentTimeMillis());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式

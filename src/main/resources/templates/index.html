@@ -56,5 +56,25 @@
         window.localStorage.removeItem("token")
         console.log("退出登录之后的token",token)
     })
+    //bug测试
+    var f1 = function(){
+        var x = "ss"
+        console.log("这是f1函数的内容"+x)
+    }
+
+    var f2 = function(){
+        var x= "sr"
+        console.log("这是f2函数的内容"+x)
+    }
+
+    function f3 (){
+        f1()
+        f2()
+        console.log("这是f3函数的内容")
+    }
+
+    //执行f3
+    f3()
+
 </script>
 <!DOCTYPE html>

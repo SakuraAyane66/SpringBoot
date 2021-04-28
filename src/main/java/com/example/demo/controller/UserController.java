@@ -178,4 +178,29 @@ public class UserController extends BaseController {
         System.out.println("从redis中取到user是什么"+user);
        return user;
     }
+    //测试查询记录是多条，但是设置的时候返回实体而不是list
+    @GetMapping("/getTest/Testdomian")
+    public String getTestDomain(){
+        UserModel userModel = userService.getTestAll(); //测试
+        System.out.println(userModel);
+        List<UserModel> list = new ArrayList<>();
+        list.add(userModel);
+        for(UserModel ll:list){
+            System.out.println("list里面是"+ll);
+        }
+       return "success";
+    }
+
+    @GetMapping("/getTest/ThreadTest")
+    public String getThreadTest() throws InterruptedException{
+       userService.getThreadTest();
+       return "success";
+    }
+
+    @GetMapping("/getTest/getTestMapperOrder")
+    public String getTestMapperOrder(){
+
+       userService.getTestMapperOrder();
+       return "success";
+    }
 }

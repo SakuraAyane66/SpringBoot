@@ -35,4 +35,7 @@ public interface UserMapper {
     //测试，根据user的id关联到author的user_id查询，主要是返回user主体 //
     List<UserModel> getUsersAndAuthor();  //int id //先注释看效果
 
+    //测试，查询多条，但是返回一个
+    UserModel getTestAll();
+
 }
