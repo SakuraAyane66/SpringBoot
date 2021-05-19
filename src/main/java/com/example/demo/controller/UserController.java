@@ -4,6 +4,7 @@ import com.example.demo.admin.update.domain.RoadInformation;
 import com.example.demo.admin.update.domain.User;
 import com.example.demo.common.base.AjaxResult;
 import com.example.demo.common.base.BaseController;
+import com.example.demo.common.utils.AllProjectTestUtil;
 import com.example.demo.common.utils.UpUtil;
 import com.example.demo.model.UserModel;
 import com.example.demo.service.UserService;
@@ -202,5 +203,13 @@ public class UserController extends BaseController {
 
        userService.getTestMapperOrder();
        return "success";
+    }
+
+    @GetMapping("/getTest/GetAllProjectUsers")
+    public List<UserModel> getAllProject(){
+       for(UserModel ll:AllProjectTestUtil.list) {
+           System.out.println("在get方法中获取到的"+ll);
+       }
+       return AllProjectTestUtil.list;
     }
 }
