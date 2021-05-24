@@ -98,6 +98,7 @@ public class UserService {
     //更新,添加了注解！！这是事务的注解
     @Transactional(rollbackFor = Exception.class)//通过添加注解或去除注解来看是否生效,还需要在启动类中添加事务注解
     public void updateUser(UserModel user){
+
         userMapper.updateUser(user);
 //        int a = 1/0;  //异常
     }

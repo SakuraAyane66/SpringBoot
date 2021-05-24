@@ -99,6 +99,8 @@ public class UserController extends BaseController {
         System.out.println("user看看"+userModel);
         //增加user
         userService.addUser(userModel);
+        //尝试向全局的list中添加util
+        AllProjectTestUtil.list.add(userModel);
         return "成功了";
     }
     //根据id删除user,可以执行
