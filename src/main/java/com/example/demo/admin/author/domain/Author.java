@@ -1,7 +1,9 @@
 package com.example.demo.admin.author.domain;
 import com.example.demo.model.UserModel;
 
-import javax.persistence.Transient;
+import java.beans.Transient;
+
+//import javax.persistence.Transient;
 
 /**
  * @author CTL
@@ -26,17 +28,13 @@ public class Author {
      */
     private String addr;
     //伪字段，不在数据库表中的字段
-    @Transient
+//    @Transient
     private Integer u_id; //表user中的主键，id
-    @Transient
+//    @Transient
     private String u_name; //表user中的name
-    @Transient
     private int age;      //age
-    @Transient
     private String email; //email
-    @Transient
     private String address; //表user中的address
-    @Transient
     private String username; //表user中的username
 
     public String getAddress() {
@@ -47,7 +45,6 @@ public class Author {
         this.address = address;
     }
 
-    @Transient
     private String password; //表user中的password
 
     //userModel对象，貌似没有这样使用的，使用的是column +property

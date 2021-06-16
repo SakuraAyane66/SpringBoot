@@ -5,7 +5,7 @@ import com.example.demo.admin.roadInfoTest.domain.RoadInfo;
 import com.example.demo.admin.roadInfoTest.service.RoadInfoService;
 import com.example.demo.common.base.AjaxResult;
 import com.example.demo.common.base.BaseController;
-import org.hibernate.annotations.Parameter;
+//import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

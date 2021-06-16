@@ -20,7 +20,7 @@
 ## 这里的参数有五种，常用的就是 create 和 update ，区别在于create 在每一次启动应用的时候都会重新创建数据库，并把之前的数据全部删掉，而update 则是采用增量的方式来进行创建，只更新修改的了部分，保留未修改部分的数据
 #spring.jpa.hibernate.ddl-auto=update
 #spring.jpa.show-sql=true
-
+# CTL添加，下面是分库分表的配置，但目前有问题，无法运行程序 ，换到了上面
 server:
   port: 8080
 
@@ -30,6 +30,24 @@ spring:
     mode: HTML
     #禁用缓存
     cache: false
+#  shardingsphere:
+#    datasource:
+#      names: master
+#      master:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driverClassName: com.mysql.cj.jdbc.Driver
+#        url: jdbc:mysql://127.0.0.1:3306/alice?serverTimezone=UTC&useSSL=false&allowMultiQueries=true
+#        username: root
+#        password: 123456
+#    sharding:
+#      tables:
+#        student:
+#          actualDataNodes: master.student_$->{0..1}
+#          tableStrategy:
+#            inline:
+#              shardingColumn: age
+#              algorithmExpression: student_$->{age%2}
+# CTL暂时注释的地方，因为配置数据源要用到分表了，所以之前的数据源配置暂时注释了
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root

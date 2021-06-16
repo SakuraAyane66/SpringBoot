@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.DemoApplication;
+import com.example.demo.alice.user.domain.OnlineUser;
 import com.example.demo.common.utils.JwtUtil;
+import com.example.demo.common.utils.OnlineUtil;
 import com.example.demo.model.UserModel;
+import com.example.demo.model.WZRGStation;
 import com.example.demo.service.UserService;
-import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,5 +114,21 @@ public class HelloController {
 //        model.addAttribute("users",users);
         model.put("users",users);
         return "test3";
+    }
+
+    //DTU调试的接口
+    @PostMapping("/PostDTU")
+    @ResponseBody()
+    public String PostDtu(HttpServletRequest request, String model){
+        OnlineUser user = OnlineUtil.analysisHttp(request);
+        System.out.println("ip地址是"+user.getIpaddr());
+        System.out.println("接收到的model是"+model);
+        return "alice+"+model;
+    }
+    //DTU调试接口
+    @GetMapping("/GetDTU")
+    @ResponseBody()
+    public String GetDtu(){
+        return "Asuna";
     }
 }

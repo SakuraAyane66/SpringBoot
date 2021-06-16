@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -14,17 +15,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import org.slf4j.LoggerFactory;
 
-@SpringBootApplication
+@SpringBootApplication //(exclude = { DataSourceAutoConfiguration.class })
 @ServletComponentScan
-@MapperScan({"com.example.demo.mapper","com.example.demo.admin.author.mapper",
-             "com.example.demo.admin.pythontest.mapper",
-             "com.example.demo.admin.update.mapper",
-             "com.example.demo.admin.roadInfoTest.mapper",
-             "com.example.demo.admin.jkyYoushibi.mapper",
-             "com.example.demo.alice.user.mapper",
-             "com.example.demo.alice.announcement.mapper",
-             "com.example.demo.alice.goodthings.mapper",
-             "com.example.demo.alice.*.mapper"})
+//@MapperScan({"com.example.demo.mapper","com.example.demo.admin.author.mapper",
+//             "com.example.demo.admin.pythontest.mapper",
+//             "com.example.demo.admin.update.mapper",
+//             "com.example.demo.admin.roadInfoTest.mapper",
+//             "com.example.demo.admin.jkyYoushibi.mapper",
+//             "com.example.demo.alice.user.mapper",
+//             "com.example.demo.alice.announcement.mapper",
+//             "com.example.demo.alice.goodthings.mapper",
+//             "com.example.demo.alice.*.mapper"})
+@MapperScan({ "com.example.demo.admin.*.mapper",
+              "com.example.demo.alice.*.mapper",
+              "com.example.demo.mapper"})
 @EnableCaching  //这是缓存的启动注解，开启缓存
 @EnableTransactionManagement   /// 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 @EnableScheduling //启动定时器的注解，表示启动定时器任务
