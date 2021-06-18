@@ -10,6 +10,6 @@
         select * from student
     </select>
     <insert id="addStudent" parameterType="com.example.demo.model.Student">
-         insert into student(id,name,age) values (#{id},#{name},#{age})
+         insert into student(uid,name,age) values (#{id},#{name},#{age})
     </insert>
 </mapper>

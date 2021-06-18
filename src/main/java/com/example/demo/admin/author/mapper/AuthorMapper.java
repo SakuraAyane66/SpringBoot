@@ -5,8 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-//这里必须加上mapper，项目没加是在启动项配置了全局自动扫描mapper
-@Mapper
+
+//@Mapper
 public interface AuthorMapper {
     //获取所有的author信息
     public List<Author> getAll();

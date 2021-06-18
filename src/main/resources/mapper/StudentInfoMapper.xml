@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace对应的是mapper/dao层的地址-->
+<mapper namespace="com.example.demo.mapper.StudentMapper">
+    <!--  id对应接口中的抽象方法，parameterType类型（后面肯定会有复杂类型）, resultType返回类型 -->
+    <select id="getAll" resultType="com.example.demo.model.StudentForm">
+        select * from student_form;
+    </select>
+    <select id="getById" resultType="com.example.demo.model.StudentForm">
+        select * from student_form where id = #{id}
+    </select>
+    <select id="getCountryById">
+        select country from student_form where id = #{id};
+    </select>
+    <select id="addToken">
+        update student_form set
+        token = #{token}
+        where id=#{id}
+    </select>
+    <select id="getByToken" resultType="com.example.demo.model.StudentForm">
+
+    </select>
+    <select id="getStuByUserId" resultType="com.example.demo.model.StudentForm" parameterType="com.example.demo.model.UserModel">
+        select * from student_form where age=#{age};
+    </select>
+</mapper>

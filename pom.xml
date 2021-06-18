@@ -20,6 +20,7 @@
         <pagehelper.boot.version>1.2.5</pagehelper.boot.version>
         <shiro.version>1.4.0</shiro.version>
         <thymeleaf.extras.shiro.version>2.0.0</thymeleaf.extras.shiro.version>
+        <druid.version>1.2.6</druid.version>
 <!--        <latest.release.version></latest.release.version>-->
     </properties>
 
@@ -86,7 +87,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.2.6</version>
+            <version>${druid.version}</version>
         </dependency>
         <!--日志的依赖包-->
 <!--        <dependency>-->
@@ -192,6 +193,11 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

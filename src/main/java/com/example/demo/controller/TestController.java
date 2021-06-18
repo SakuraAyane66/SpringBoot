@@ -25,6 +25,7 @@ public class TestController extends BaseController {
 
     @PostMapping("/Test/addStudent")
     public AjaxResult addStudent(@RequestBody Student student){
+        System.out.println("Student是"+student);
         studentService.addStudent(student);
         return success("成功插入");
     }

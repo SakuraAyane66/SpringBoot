@@ -1,6 +1,5 @@
 package com.example.demo.admin.roadInfoTest.controller;
 
-import com.example.demo.admin.author.controller.AuthorController;
 import com.example.demo.admin.roadInfoTest.domain.RoadInfo;
 import com.example.demo.admin.roadInfoTest.service.RoadInfoService;
 import com.example.demo.common.base.AjaxResult;
@@ -25,7 +24,7 @@ import java.util.List;
 @RestController  //不用返回视图，只返回数据
 public class RoadInfoController extends BaseController {
     //日志
-    private static final Logger logger = LoggerFactory.getLogger(AuthorController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RoadInfoController.class);
     @Autowired
     private RoadInfoService roadInfoService;
 

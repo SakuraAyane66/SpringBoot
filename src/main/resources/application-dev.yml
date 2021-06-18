@@ -30,51 +30,51 @@ spring:
     mode: HTML
     #禁用缓存
     cache: false
-#  shardingsphere:
-#    datasource:
-#      names: master
-#      master:
-#        type: com.alibaba.druid.pool.DruidDataSource
-#        driverClassName: com.mysql.cj.jdbc.Driver
-#        url: jdbc:mysql://127.0.0.1:3306/alice?serverTimezone=UTC&useSSL=false&allowMultiQueries=true
-#        username: root
-#        password: 123456
-#    sharding:
-#      tables:
-#        student:
-#          actualDataNodes: master.student_$->{0..1}
-#          tableStrategy:
-#            inline:
-#              shardingColumn: age
-#              algorithmExpression: student_$->{age%2}
+  shardingsphere:
+    datasource:
+      names: master
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/alice?serverTimezone=UTC&useSSL=false&allowMultiQueries=true
+        username: root
+        password: 123456
+    sharding:
+      tables:
+        student:
+          actualDataNodes: master.student_$->{0..1}
+          tableStrategy:
+            inline:
+              shardingColumn: age
+              algorithmExpression: student_$->{age%2}
 # CTL暂时注释的地方，因为配置数据源要用到分表了，所以之前的数据源配置暂时注释了
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/alice?serverTimezone=UTC&useSSL=false&allowMultiQueries=true
-    type: com.alibaba.druid.pool.DruidDataSource
-    #后面是修改的druid修改的配置
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
-    timeBetweenEvictionRunsMillis: 60000
-    # 配置一个连接在池中最小生存的时间，单位是毫秒
-    minEvictableIdleTimeMillis: 300000
-    # 配置检测连接是否有效
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    filter:
-      stat:
-        # 慢SQL记录
-        log-slow-sql: false
-        slow-sql-millis: 1000
-        merge-sql: true
-      wall:
-        config:
-          multi-statement-allow: true
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://127.0.0.1:3306/alice?serverTimezone=UTC&useSSL=false&allowMultiQueries=true
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    #后面是修改的druid修改的配置
+#    initialSize: 5
+#    minIdle: 5
+#    maxActive: 20
+#    timeBetweenEvictionRunsMillis: 60000
+#    # 配置一个连接在池中最小生存的时间，单位是毫秒
+#    minEvictableIdleTimeMillis: 300000
+#    # 配置检测连接是否有效
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    filter:
+#      stat:
+#        # 慢SQL记录
+#        log-slow-sql: false
+#        slow-sql-millis: 1000
+#        merge-sql: true
+#      wall:
+#        config:
+#          multi-statement-allow: true
   cache:
     type: redis
   redis:

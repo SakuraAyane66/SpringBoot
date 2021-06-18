@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import org.slf4j.LoggerFactory;
 
-@SpringBootApplication //(exclude = { DataSourceAutoConfiguration.class })
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @ServletComponentScan
 //@MapperScan({"com.example.demo.mapper","com.example.demo.admin.author.mapper",
 //             "com.example.demo.admin.pythontest.mapper",
