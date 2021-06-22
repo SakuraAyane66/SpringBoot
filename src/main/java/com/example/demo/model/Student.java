@@ -19,4 +19,6 @@ public class Student {
     private int age;
     //name属性
     private String name;
+    //dbn属性。分表字段，重新测试
+    private Integer dbn;
 }

@@ -28,4 +28,14 @@ public class StudentServiceImpl implements StudentService {
     public void addStudent(Student student) {
         mapper.addStudent(student);
     }
+
+    @Override
+    public List<Student> getStudentByName(Student student) {
+        return mapper.getStudentByName(student);
+    }
+
+    @Override
+    public List<Student> getStudentDbnAndId(Student student) {
+        return mapper.getStudentDbnAndId(student);
+    }
 }

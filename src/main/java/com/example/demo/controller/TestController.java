@@ -35,4 +35,17 @@ public class TestController extends BaseController {
         List<Student> list= studentService.getAll();
         return success("200",list);
     }
+
+    @PostMapping("/Test/getStudentByName")
+    public AjaxResult getStudentByName(@RequestBody Student student){
+        List<Student> list = studentService.getStudentByName(student);
+        return success("200",list);
+    }
+    //根据dbn查询 相关信息
+    @PostMapping("/Test/getStudentDbnAndId")
+    public AjaxResult getStudentDbnAndId(@RequestBody Student student){
+        System.out.println("student?"+student);
+        List<Student> list = studentService.getStudentDbnAndId(student);
+        return success("200",list);
+    }
 }

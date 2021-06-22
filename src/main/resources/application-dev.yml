@@ -45,8 +45,17 @@ spring:
           actualDataNodes: master.student_$->{0..1}
           tableStrategy:
             inline:
-              shardingColumn: age
-              algorithmExpression: student_$->{age%2}
+              shardingColumn: dbn
+              algorithmExpression: student_$->{dbn}
+# 暂时注释，注意缩进
+#    sharding:
+#      tables:
+#        student:
+#          actualDataNodes: master.student_$->{0..1}
+#          tableStrategy:
+#            inline:
+#              shardingColumn: age
+#              algorithmExpression: student_$->{age%2}
 # CTL暂时注释的地方，因为配置数据源要用到分表了，所以之前的数据源配置暂时注释了
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver

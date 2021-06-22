@@ -13,5 +13,10 @@ public interface TestMapper {
     List<Student> getAll();
     //插入一条学生内容
     void addStudent(Student student);
+    //根据学生名字查询学生信息，返回所有名字=xx人的信息
+    List<Student> getStudentByName(Student student);
+
+    //根据dbn和Id查询
+    List<Student> getStudentDbnAndId(Student student);
 
 }
