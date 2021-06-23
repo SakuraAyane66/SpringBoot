@@ -30,8 +30,8 @@ public class AllProjectTestUtil {
         for(UserModel ll:allUser){
             list.add(ll);
         }
-        for(UserModel ll:list){
-            System.out.println("每一个usermodel是？==="+ll);
-        }
+//        for(UserModel ll:list){
+//            System.out.println("每一个usermodel是？==="+ll);
+//        }
     }
 }
