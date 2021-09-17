@@ -79,7 +79,7 @@ public class AliceUserController extends BaseController {
             return error("用户名为空,请输入用户名");
         }
         if(user.getClearPassword()==null){
-            return error("密码为空,请输入用户名");
+            return error("密码为空,请输入密码");
         }
 
         //两次密码不一样

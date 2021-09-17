@@ -1,5 +1,7 @@
 package com.example.demo.alice.user.domain;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Date;
  * <p>用户类 </p>
  * 创建日期：2021-01-21 00:17
  */
+@Data
 public class AliceUser {
     private Integer id;
     private String username;

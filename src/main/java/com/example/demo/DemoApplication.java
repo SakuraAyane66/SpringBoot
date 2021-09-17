@@ -50,13 +50,6 @@ public class DemoApplication implements WebMvcConfigurer { //让启动类实现�
 
         //使用日志
         logger.info("SpringBoot加载完毕");
-
-
-        //Object s = getClass();
-//        Object d= DemoApplication.class;
-//        System.out.println("这个object是啥"+s);
-//        System.out.println("这又是啥"+d);
-//        System.out.println("是否相等"+s==d);
     }
 
 }

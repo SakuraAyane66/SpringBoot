@@ -46,7 +46,7 @@
         <if test="update_time !=null and update_time !=''">update_time,</if>
         <if test="remark !=null and remark !=''">remark,</if>
         <if test="ban_time !=null and ban_time !=''">ban_time,</if>
-        <if test="status !=null and status !=''">status,</if>
+        status,
         creat_time
         )
         values(
@@ -67,7 +67,7 @@
         <if test="update_time !=null and update_time !=''">#{update_time},</if>
         <if test="remark !=null and remark !=''">#{remark},</if>
         <if test="ban_time !=null and ban_time !=''">#{ban_time},</if>
-        <if test="status !=null and status !=''">#{status},</if>
+        0,
         sysdate()
         )
     </insert>

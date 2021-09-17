@@ -18,5 +18,4 @@ public class Publicactivity {
     private String content;
     private Date time;
     private String author;
-    private String hyperlink;
 }
