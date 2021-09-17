@@ -10,7 +10,7 @@
     <!--向在线用户表中插入一个用户-->
     <insert id="insertOnlineUser" parameterType="com.example.demo.alice.user.domain.OnlineUser">
         insert into sys_users_online(
-        <if test="username!=null and username !=''">login_name,</if>
+        <if test="username!=null and username !=''">username,</if>
         <if test="ipaddr!=null and ipaddr!=''">ipaddr,</if>
         <if test="loginLocation!=null and loginLocation !=''">ip_location,</if>
         <if test="browser!=null and browser !=''">browser,</if>

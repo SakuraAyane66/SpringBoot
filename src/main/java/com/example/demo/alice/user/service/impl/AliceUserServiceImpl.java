@@ -71,6 +71,7 @@ public class AliceUserServiceImpl implements AliceUserService {
     //由于token是String，不能根据返回类型来判断是否登录成功，所以改为返回map了
     @Override
     public Map<String,String> login(HttpServletRequest request,AliceUser user) {
+        //此处应该逻辑分离，应该直接返回token，剩余的插入日志，插入在线表等应该分离（消息队列）
         Map<String, String> resultMap = new HashMap<>();
         OnlineUser onlineUser = OnlineUtil.analysisHttp(request);
         onlineUser.setUsername(user.getUsername());//赋值username
