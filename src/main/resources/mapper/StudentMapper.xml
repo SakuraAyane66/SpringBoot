@@ -27,7 +27,7 @@
         <where>
             (dbn = #{dbn} or 1 = 1)
             <if test="id !=null and id !=''">
-                and uid = #{id}
+                and id = #{id}
             </if>
         </where>
     </select>

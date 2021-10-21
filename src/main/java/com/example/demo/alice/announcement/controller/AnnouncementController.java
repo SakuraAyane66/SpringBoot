@@ -8,6 +8,7 @@ import com.example.demo.common.base.BaseSearchMiddle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,11 @@ public class AnnouncementController extends BaseController {
         }
         Integer id = baseSearchMiddle.getId();
         Announcement announcement = announcementService.getAnnouncementById(id);
+        System.out.println(announcement);
+        if(announcement==null){
+            //为null，数据库找不到该数据库
+            return error(206,"查无此id数据");
+        }
         return success("成功获取",announcement);
     }
 

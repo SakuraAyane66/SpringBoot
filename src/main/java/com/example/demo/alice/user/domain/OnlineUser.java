@@ -1,5 +1,7 @@
 package com.example.demo.alice.user.domain;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Date;
  * <p>在线用户的实体类（也是登录记录的实体类） </p>
  * 创建日期：2021-03-31 15:56
  */
+@Data
 public class OnlineUser {
     /** 用户的username*/
     private String username;

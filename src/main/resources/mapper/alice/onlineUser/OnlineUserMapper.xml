@@ -33,7 +33,7 @@
 
     <!--向登录日志表插入一条信息-->
     <insert id="insertLoginInfor" parameterType="com.example.demo.alice.user.domain.OnlineUser">
-        insert into sys_logininfor(
+        insert into sys_login_infor(
         <if test="username!=null and username !=''">username,</if>
         <if test="ipaddr!=null and ipaddr!=''">ipaddr,</if>
         <if test="loginLocation!=null and loginLocation !=''">ip_location,</if>

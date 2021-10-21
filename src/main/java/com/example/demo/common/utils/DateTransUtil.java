@@ -22,8 +22,6 @@ public class DateTransUtil {
     public static String getDateTime(Long currentTime){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(currentTime);
-//        System.out.println("what is"+date);
-//        System.out.println(formatter.format(date));
         return formatter.format(date);
     }
     //直接获取系统当前的年份
@@ -80,8 +78,6 @@ public class DateTransUtil {
 
     //根据传入的String时间，和String的格式时长x，返回前x秒的时间，不涉及跨天
     public static String getPreTime(String time,String x){
-
-
         return "";
     }
     public static void main(String[] args) {
