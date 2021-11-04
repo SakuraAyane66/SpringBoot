@@ -21,4 +21,8 @@ public class Publicconnect {
     private String author;
     //hyperlink超链接地址
     private String hyperlink;
+    private final Integer db =2;
+    public Integer getDb() {
+        return db;
+    }
 }

@@ -5,11 +5,13 @@ import com.example.demo.alice.announcement.service.AnnouncementService;
 import com.example.demo.common.base.AjaxResult;
 import com.example.demo.common.base.BaseController;
 import com.example.demo.common.base.BaseSearchMiddle;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author CTL
@@ -65,5 +67,17 @@ public class AnnouncementController extends BaseController {
         String keyword = baseSearchMiddle.getKeyword();
         List<Announcement> list = announcementService.getAnnouncemetnByString(keyword);
         return success("成功获取",list);
+    }
+
+    //根据关键词查询记录，所有表（4个主数据表）中的记录
+    @PostMapping(ctx+"/getAllKeyword")
+    @ResponseBody
+    public AjaxResult getAllKeyword(@RequestBody BaseSearchMiddle baseSearchMiddle){
+        System.out.println("keyword?"+baseSearchMiddle.getKeyword());
+        if (baseSearchMiddle.getKeyword()==null || baseSearchMiddle.getKeyword() =="") {
+            return error(200,"关键词为空","");
+        }
+        List<Map> list = announcementService.getAllKeywords(baseSearchMiddle.getKeyword());
+        return success("成功返回",list);
     }
 }

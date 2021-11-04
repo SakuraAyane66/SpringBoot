@@ -1,6 +1,7 @@
 package com.example.demo.common.websocket;
 
 import com.example.demo.DemoApplication;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -21,7 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
-@ServerEndpoint("/imserver/{userId}")
+@ServerEndpoint(value = "/imserver/{userId}",encoders = {ServerEncoder.class})
 @Component
 public class WebSocketServer {
     private static final Logger log = LoggerFactory.getLogger(WebSocketServer.class);
@@ -44,7 +47,8 @@ public class WebSocketServer {
         this.userId=userId;
         if(this.getOnlineCount()==MaxOnlineCount){
             try {
-                sendMessage("当前聊天室人数已达上限");
+//                sendMessage("当前聊天室人数已达上限");
+                sendSystemMessage("当前聊天室人数已达上限！");
             }catch (IOException e){
                 log.error("用户:"+userId+",网络异常!!!!!!");
             }
@@ -61,7 +65,8 @@ public class WebSocketServer {
             }
             log.info("用户连接:"+userId+",当前在线人数为:" + getOnlineCount());
             try {
-                sendMessage("连接成功");
+//                sendMessage("userId为"+this.userId+"连接成功");
+                sendSystemMessage("userId为"+this.userId+"连接成功");
             } catch (IOException e) {
                 log.error("用户:"+userId+",网络异常!!!!!!");
             }
@@ -92,7 +97,7 @@ public class WebSocketServer {
         //消息保存到数据库、redis
         if(StringUtils.isNotBlank(message)){
             try {
-                sendOnlineMessage(message);
+                sendOnlineMessage(message,this.userId);
 //                //解析发送的报文
 //                JSONObject jsonObject = JSON.parseObject(message);
 //                //追加发送人(防止串改)
@@ -128,6 +133,30 @@ public class WebSocketServer {
         this.session.getBasicRemote().sendText(message);
     }
 
+    /**
+     * 发送系统消息，携带的code为201，前端不需要存进data
+     * @param message
+     * @throws IOException
+     */
+    public void sendSystemMessage(String message) throws IOException{
+        //再次封装发送系统消息
+        sendMessageWithUserId(message,this.userId,"201");
+    }
+    /**
+     * 实现服务器主动推送,携带用户信息
+     */
+    public void sendMessageWithUserId(String userId,String message,String code) throws IOException {
+        Map<String,String> map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("message",message);
+        map.put("code",code); //code为200的时候表示接收到的是用户信息,201 是系统返回消息，不同添加进前端的data中
+        try {
+            this.session.getBasicRemote().sendObject(map);
+        }catch (Exception e){e.printStackTrace();}
+
+    }
+
+
 
     /**
      * 发送自定义消息
@@ -153,11 +182,12 @@ public class WebSocketServer {
         WebSocketServer.onlineCount--;
     }
     //向在线所有人发送消息
-    public void sendOnlineMessage(String message){
+    public void sendOnlineMessage(String message,String userId){
         //对线程安全的map进行遍历（在线用户遍历）
         for(String key: webSocketMap.keySet()){
                 try {
-                   webSocketMap.get(key).sendMessage(message);
+                    //调用每个用户的sendMessage方法
+                   webSocketMap.get(key).sendMessageWithUserId(this.userId,message,"200");
                 }catch (IOException e){
                     continue;
                 }

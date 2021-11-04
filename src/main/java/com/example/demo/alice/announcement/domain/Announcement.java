@@ -18,6 +18,8 @@ public class Announcement {
     private String content;
     //author作者
     private String author;
+    //db用于前端识别的标识
+    private final Integer db = 1;
 
     public Announcement(){} //无参构造器
     public Integer getId() {
@@ -58,6 +60,10 @@ public class Announcement {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Integer getDb() {
+        return db;
     }
 
     public Announcement(Integer id, String topic, Date time, String content, String author) {

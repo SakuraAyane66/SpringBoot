@@ -3,6 +3,7 @@ package com.example.demo.admin.update.service.impl;
 import com.example.demo.admin.update.service.ExcelService;
 import com.example.demo.common.utils.DateTransUtil;
 import com.example.demo.common.utils.ExcelParserUtil;
+import com.example.demo.common.utils.FileUtil;
 import com.example.demo.common.utils.UpUtil;
 import com.example.demo.admin.update.domain.User;
 import com.example.demo.admin.update.mapper.ExcelUserMapper;
@@ -23,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.demo.common.utils.FileUtil.getFileList;
 
 /**
  * @author CTL
@@ -199,5 +202,32 @@ public class ExcelServiceImpl implements ExcelService {
     @Override
     public List<User> getUsers(int i){
         return null;
+    }
+
+    @Override
+    public void changeTest() {
+        String FILE_IN = "D:\\工作相关\\二期项目\\数据txt文件\\customer";
+                File f = new File(FILE_IN);
+                List list = new ArrayList();
+                list =getFileList(f);
+        List<String> stringList = new ArrayList<>();
+        stringList.add("xxx");
+        return;
+//        for(String ss:stringList){
+//            Boolean s = ExcelParserUtil.validateExcel(ss);
+//            if(s==false) {
+//                return;
+//            }
+//            //解析excel流的workBook对象
+//            Workbook wb = null;
+//            //判断excel的版本
+//            if(ExcelParserUtil.isExcel2003(ss)){
+//                wb = new HSSFWorkbook();
+//                System.out.println("excel版本是2003");
+//            }else {
+////                wb = new XSSFWorkbook(is);
+//                System.out.println("excel版本是2007");
+//            }
+//        }
     }
 }

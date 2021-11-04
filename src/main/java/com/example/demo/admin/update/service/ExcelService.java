@@ -31,4 +31,6 @@ public interface ExcelService{
     String parseExcel(MultipartFile file) throws Exception;
     public List<User> readExcel(Workbook wb);
     public List<User> getUsers(int i);
+
+    public void changeTest();
 }

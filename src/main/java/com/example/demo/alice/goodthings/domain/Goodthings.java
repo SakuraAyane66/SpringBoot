@@ -23,4 +23,9 @@ public class Goodthings {
     private String content;
     //author作者
     private String author;
+    //db用于前端识别的标识
+    private final Integer db = 3;
+    public Integer getDb() {
+        return db;
+    }
 }

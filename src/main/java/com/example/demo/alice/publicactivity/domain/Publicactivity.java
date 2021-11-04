@@ -18,4 +18,8 @@ public class Publicactivity {
     private String content;
     private Date time;
     private String author;
+    private final Integer db=4;
+    public Integer getDb() {
+        return db;
+    }
 }

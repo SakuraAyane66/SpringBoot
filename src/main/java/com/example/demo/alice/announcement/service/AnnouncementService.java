@@ -3,6 +3,7 @@ package com.example.demo.alice.announcement.service;
 import com.example.demo.alice.announcement.domain.Announcement;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AnnouncementService {
     //获取最新的9条记录
@@ -13,4 +14,11 @@ public interface AnnouncementService {
     Announcement getAnnouncementById(Integer id);
     //根据String查询包含这个String的集合
     List<Announcement> getAnnouncemetnByString(String keyword);
+
+    /**
+     * 得到所有表中的关键字数据,并统一返回给前端
+     * @param keyword
+     * @return
+     */
+    List<Map> getAllKeywords(String keyword);
 }
