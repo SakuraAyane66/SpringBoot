@@ -1,17 +1,11 @@
-package com.example.demo.common.utils;
+package com.example.demo.common.utils.Test;
 
 import org.gavaghan.geodesy.Ellipsoid;
 import org.gavaghan.geodesy.GeodeticCalculator;
 import org.gavaghan.geodesy.GeodeticCurve;
 import org.gavaghan.geodesy.GlobalCoordinates;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import java.io.FileReader;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class TestUtils {
     public static void main(String[] args) {
