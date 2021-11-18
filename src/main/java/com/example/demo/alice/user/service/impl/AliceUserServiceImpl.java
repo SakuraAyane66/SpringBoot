@@ -157,4 +157,6 @@ public class AliceUserServiceImpl implements AliceUserService {
             return resultMap;
         }
     }
+
+    //手机登录接口方式应该单独分开，业务需要独立，程序要面向对象。解耦
 }

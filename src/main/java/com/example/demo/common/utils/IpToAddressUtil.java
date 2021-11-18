@@ -22,6 +22,9 @@ public class IpToAddressUtil {
     //tx的访问key
     private static final String KEY = "YGYBZ-S76CX-ICT4Q-76VUM-CEHW2-FSF53";
     public static String getCityInfo(String ip)  {
+        if(ip=="127.0.0.1"){//本地登录
+            return "本地登录";
+        }
         String s = sendGet(ip, KEY);
         Map map = JSONObject.parseObject(s, Map.class);
         String message = (String) map.get("message");
