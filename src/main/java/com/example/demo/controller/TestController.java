@@ -7,6 +7,7 @@ import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -21,7 +22,8 @@ import java.util.List;
 public class TestController extends BaseController {
     @Autowired
     private StudentService studentService;
-
+//    @Autowired
+//    private RestTemplate restTemplate;
 
     @PostMapping("/Test/addStudent")
     public AjaxResult addStudent(@RequestBody Student student){
