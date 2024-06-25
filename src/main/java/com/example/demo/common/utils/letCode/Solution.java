@@ -1,5 +1,5 @@
 package com.example.demo.common.utils.letCode;
-
+//继续努力啊
 //不用* / % 符合，求2个整数的商 比如 15/7 = 2 ,慢慢来吧，培养思考能力
 class Solution {
     public int divide(int a, int b){
